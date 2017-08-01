@@ -1,0 +1,274 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 1991-2012 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+*/
+(header "symbol" (version "1.2"))
+(symbol
+	(rect 16 16 328 592)
+	(text "receiver" (rect 5 0 52 14)(font "Arial" (font_size 8)))
+	(text "inst" (rect 8 560 25 572)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "data_in[11..0]" (rect 0 0 76 14)(font "Arial" (font_size 8)))
+		(text "data_in[11..0]" (rect 21 27 97 41)(font "Arial" (font_size 8)))
+		(line (pt 0 32)(pt 16 32)(line_width 3))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "clk" (rect 0 0 15 14)(font "Arial" (font_size 8)))
+		(text "clk" (rect 21 43 36 57)(font "Arial" (font_size 8)))
+		(line (pt 0 48)(pt 16 48))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "rst" (rect 0 0 15 14)(font "Arial" (font_size 8)))
+		(text "rst" (rect 21 59 36 73)(font "Arial" (font_size 8)))
+		(line (pt 0 64)(pt 16 64))
+	)
+	(port
+		(pt 312 32)
+		(output)
+		(text "rcv_data[11..0]" (rect 0 0 86 14)(font "Arial" (font_size 8)))
+		(text "rcv_data[11..0]" (rect 205 27 291 41)(font "Arial" (font_size 8)))
+		(line (pt 312 32)(pt 296 32)(line_width 3))
+	)
+	(port
+		(pt 312 48)
+		(output)
+		(text "rcv_data_delay[11..0]" (rect 0 0 123 14)(font "Arial" (font_size 8)))
+		(text "rcv_data_delay[11..0]" (rect 168 43 291 57)(font "Arial" (font_size 8)))
+		(line (pt 312 48)(pt 296 48)(line_width 3))
+	)
+	(port
+		(pt 312 64)
+		(output)
+		(text "fft_source_real_delay[11..0]" (rect 0 0 161 14)(font "Arial" (font_size 8)))
+		(text "fft_source_real_delay[11..0]" (rect 130 59 291 73)(font "Arial" (font_size 8)))
+		(line (pt 312 64)(pt 296 64)(line_width 3))
+	)
+	(port
+		(pt 312 80)
+		(output)
+		(text "x_cor1[20..0]" (rect 0 0 75 14)(font "Arial" (font_size 8)))
+		(text "x_cor1[20..0]" (rect 216 75 291 89)(font "Arial" (font_size 8)))
+		(line (pt 312 80)(pt 296 80)(line_width 3))
+	)
+	(port
+		(pt 312 96)
+		(output)
+		(text "x_cor2[20..0]" (rect 0 0 75 14)(font "Arial" (font_size 8)))
+		(text "x_cor2[20..0]" (rect 216 91 291 105)(font "Arial" (font_size 8)))
+		(line (pt 312 96)(pt 296 96)(line_width 3))
+	)
+	(port
+		(pt 312 112)
+		(output)
+		(text "pre_cnt" (rect 0 0 43 14)(font "Arial" (font_size 8)))
+		(text "pre_cnt" (rect 248 107 291 121)(font "Arial" (font_size 8)))
+		(line (pt 312 112)(pt 296 112))
+	)
+	(port
+		(pt 312 128)
+		(output)
+		(text "fft_sink_ready" (rect 0 0 82 14)(font "Arial" (font_size 8)))
+		(text "fft_sink_ready" (rect 209 123 291 137)(font "Arial" (font_size 8)))
+		(line (pt 312 128)(pt 296 128))
+	)
+	(port
+		(pt 312 144)
+		(output)
+		(text "p_cnt_o[7..0]" (rect 0 0 74 14)(font "Arial" (font_size 8)))
+		(text "p_cnt_o[7..0]" (rect 217 139 291 153)(font "Arial" (font_size 8)))
+		(line (pt 312 144)(pt 296 144)(line_width 3))
+	)
+	(port
+		(pt 312 160)
+		(output)
+		(text "fft_source_imag_delay[11..0]" (rect 0 0 166 14)(font "Arial" (font_size 8)))
+		(text "fft_source_imag_delay[11..0]" (rect 125 155 291 169)(font "Arial" (font_size 8)))
+		(line (pt 312 160)(pt 296 160)(line_width 3))
+	)
+	(port
+		(pt 312 176)
+		(output)
+		(text "fft_source_eeror[1..0]" (rect 0 0 126 14)(font "Arial" (font_size 8)))
+		(text "fft_source_eeror[1..0]" (rect 165 171 291 185)(font "Arial" (font_size 8)))
+		(line (pt 312 176)(pt 296 176)(line_width 3))
+	)
+	(port
+		(pt 312 192)
+		(output)
+		(text "cnt_o[8..0]" (rect 0 0 60 14)(font "Arial" (font_size 8)))
+		(text "cnt_o[8..0]" (rect 231 187 291 201)(font "Arial" (font_size 8)))
+		(line (pt 312 192)(pt 296 192)(line_width 3))
+	)
+	(port
+		(pt 312 208)
+		(output)
+		(text "fft_source_sop" (rect 0 0 88 14)(font "Arial" (font_size 8)))
+		(text "fft_source_sop" (rect 203 203 291 217)(font "Arial" (font_size 8)))
+		(line (pt 312 208)(pt 296 208))
+	)
+	(port
+		(pt 312 224)
+		(output)
+		(text "max_p[8..0]" (rect 0 0 66 14)(font "Arial" (font_size 8)))
+		(text "max_p[8..0]" (rect 225 219 291 233)(font "Arial" (font_size 8)))
+		(line (pt 312 224)(pt 296 224)(line_width 3))
+	)
+	(port
+		(pt 312 240)
+		(output)
+		(text "fft_source_eop" (rect 0 0 88 14)(font "Arial" (font_size 8)))
+		(text "fft_source_eop" (rect 203 235 291 249)(font "Arial" (font_size 8)))
+		(line (pt 312 240)(pt 296 240))
+	)
+	(port
+		(pt 312 256)
+		(output)
+		(text "max_value[20..0]" (rect 0 0 96 14)(font "Arial" (font_size 8)))
+		(text "max_value[20..0]" (rect 195 251 291 265)(font "Arial" (font_size 8)))
+		(line (pt 312 256)(pt 296 256)(line_width 3))
+	)
+	(port
+		(pt 312 272)
+		(output)
+		(text "fft_source_valid" (rect 0 0 93 14)(font "Arial" (font_size 8)))
+		(text "fft_source_valid" (rect 198 267 291 281)(font "Arial" (font_size 8)))
+		(line (pt 312 272)(pt 296 272))
+	)
+	(port
+		(pt 312 288)
+		(output)
+		(text "syn_point[8..0]" (rect 0 0 83 14)(font "Arial" (font_size 8)))
+		(text "syn_point[8..0]" (rect 208 283 291 297)(font "Arial" (font_size 8)))
+		(line (pt 312 288)(pt 296 288)(line_width 3))
+	)
+	(port
+		(pt 312 304)
+		(output)
+		(text "fft_source_exp[5..0]" (rect 0 0 116 14)(font "Arial" (font_size 8)))
+		(text "fft_source_exp[5..0]" (rect 175 299 291 313)(font "Arial" (font_size 8)))
+		(line (pt 312 304)(pt 296 304)(line_width 3))
+	)
+	(port
+		(pt 312 320)
+		(output)
+		(text "fft_source_real[11..0]" (rect 0 0 123 14)(font "Arial" (font_size 8)))
+		(text "fft_source_real[11..0]" (rect 168 315 291 329)(font "Arial" (font_size 8)))
+		(line (pt 312 320)(pt 296 320)(line_width 3))
+	)
+	(port
+		(pt 312 336)
+		(output)
+		(text "fft_source_imag[11..0]" (rect 0 0 128 14)(font "Arial" (font_size 8)))
+		(text "fft_source_imag[11..0]" (rect 163 331 291 345)(font "Arial" (font_size 8)))
+		(line (pt 312 336)(pt 296 336)(line_width 3))
+	)
+	(port
+		(pt 312 352)
+		(output)
+		(text "fft_sop" (rect 0 0 41 14)(font "Arial" (font_size 8)))
+		(text "fft_sop" (rect 250 347 291 361)(font "Arial" (font_size 8)))
+		(line (pt 312 352)(pt 296 352))
+	)
+	(port
+		(pt 312 368)
+		(output)
+		(text "fft_eop" (rect 0 0 41 14)(font "Arial" (font_size 8)))
+		(text "fft_eop" (rect 250 363 291 377)(font "Arial" (font_size 8)))
+		(line (pt 312 368)(pt 296 368))
+	)
+	(port
+		(pt 312 384)
+		(output)
+		(text "fft_data_valid" (rect 0 0 77 14)(font "Arial" (font_size 8)))
+		(text "fft_data_valid" (rect 214 379 291 393)(font "Arial" (font_size 8)))
+		(line (pt 312 384)(pt 296 384))
+	)
+	(port
+		(pt 312 400)
+		(output)
+		(text "fft_source_real_delay_1[11..0]" (rect 0 0 175 14)(font "Arial" (font_size 8)))
+		(text "fft_source_real_delay_1[11..0]" (rect 116 395 291 409)(font "Arial" (font_size 8)))
+		(line (pt 312 400)(pt 296 400)(line_width 3))
+	)
+	(port
+		(pt 312 416)
+		(output)
+		(text "fft_source_imag_delay_1[11..0]" (rect 0 0 180 14)(font "Arial" (font_size 8)))
+		(text "fft_source_imag_delay_1[11..0]" (rect 111 411 291 425)(font "Arial" (font_size 8)))
+		(line (pt 312 416)(pt 296 416)(line_width 3))
+	)
+	(port
+		(pt 312 432)
+		(output)
+		(text "demap_sink_sop" (rect 0 0 95 14)(font "Arial" (font_size 8)))
+		(text "demap_sink_sop" (rect 196 427 291 441)(font "Arial" (font_size 8)))
+		(line (pt 312 432)(pt 296 432))
+	)
+	(port
+		(pt 312 448)
+		(output)
+		(text "demap_sink_eop" (rect 0 0 95 14)(font "Arial" (font_size 8)))
+		(text "demap_sink_eop" (rect 196 443 291 457)(font "Arial" (font_size 8)))
+		(line (pt 312 448)(pt 296 448))
+	)
+	(port
+		(pt 312 464)
+		(output)
+		(text "a_r[11..0]" (rect 0 0 54 14)(font "Arial" (font_size 8)))
+		(text "a_r[11..0]" (rect 237 459 291 473)(font "Arial" (font_size 8)))
+		(line (pt 312 464)(pt 296 464)(line_width 3))
+	)
+	(port
+		(pt 312 480)
+		(output)
+		(text "demap_dout[35..0]" (rect 0 0 105 14)(font "Arial" (font_size 8)))
+		(text "demap_dout[35..0]" (rect 186 475 291 489)(font "Arial" (font_size 8)))
+		(line (pt 312 480)(pt 296 480)(line_width 3))
+	)
+	(port
+		(pt 312 496)
+		(output)
+		(text "demap_sink_valid" (rect 0 0 100 14)(font "Arial" (font_size 8)))
+		(text "demap_sink_valid" (rect 191 491 291 505)(font "Arial" (font_size 8)))
+		(line (pt 312 496)(pt 296 496))
+	)
+	(port
+		(pt 312 512)
+		(output)
+		(text "rt_r[24..0]" (rect 0 0 55 14)(font "Arial" (font_size 8)))
+		(text "rt_r[24..0]" (rect 236 507 291 521)(font "Arial" (font_size 8)))
+		(line (pt 312 512)(pt 296 512)(line_width 3))
+	)
+	(port
+		(pt 312 528)
+		(output)
+		(text "rt_i[24..0]" (rect 0 0 53 14)(font "Arial" (font_size 8)))
+		(text "rt_i[24..0]" (rect 238 523 291 537)(font "Arial" (font_size 8)))
+		(line (pt 312 528)(pt 296 528)(line_width 3))
+	)
+	(drawing
+		(rectangle (rect 16 16 296 560))
+	)
+)
