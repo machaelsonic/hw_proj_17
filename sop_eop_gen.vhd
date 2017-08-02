@@ -65,6 +65,9 @@ process(rst_n,clk) is
    begin
 	  if rst_n='0' then
 	     cnt<=0;
+		 data_valid<='0';
+	     sop<='1';
+		 eop<='0';
 	  elsif clk'event and clk='1' then
 	    if cnt_en='1' then
 		     if cnt=567 then

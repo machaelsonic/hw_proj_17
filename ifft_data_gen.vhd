@@ -7,6 +7,7 @@ entity ifft_data_gen is
        clk: in std_logic;
        din: in std_logic_vector(35 downto 0);
        source_data_valid:in std_logic;
+	   ifft_sink_ready: in std_logic;
        sink_data_valid:out std_logic;
        sop:out std_logic;
        eop:out std_logic;
@@ -15,23 +16,30 @@ entity ifft_data_gen is
 end entity ifft_data_gen ;
 
 architecture rtl of ifft_data_gen is
- signal cnt,cnt1: integer range 0 to 256;
+ signal cnt,cnt1: integer range 0 to 255;
  begin
+ sink_data_valid<='1';
   process(rst_n,clk) is
     begin
       if rst_n='0' then
          cnt<=0; 
-                 
-         sink_data_valid<='0';
+         sop<='1'; 
+         eop<='0';        
+         --sink_data_valid<='0';
       elsif clk'event and clk='1' then
-         sink_data_valid<=source_data_valid;
-         if source_data_valid='1' then
+         --sink_data_valid<=source_data_valid;
+		 --sink_data_valid<='1';
+		 --sink_data_valid<=ifft_sink_ready;
+         --if source_data_valid='1' then
+		 if ifft_sink_ready='1' then
+		 --if rst_n='1' then
            if cnt=255 then
               cnt<=0;
            else
               cnt<=cnt+1;
            end if;
-           case cnt is
+         end if; 
+		 case cnt is
            when 255 =>
             sop<='0'; 
             eop<='1';
@@ -42,12 +50,8 @@ architecture rtl of ifft_data_gen is
             sop<='0'; 
             eop<='0';
          end case;
-         else
-           cnt<=0;
-           sop<='0'; 
-            eop<='0';
-        end if;
       end if;
+	  
   end process;
 
 

@@ -99,44 +99,51 @@ COMPONENT ifft_ram
 	);
 END COMPONENT;
 
-SIGNAL	dout_ALTERA_SYNTHESIZED :  STD_LOGIC_VECTOR(15 DOWNTO 0);
-SIGNAL	ram_data_oe_ALTERA_SYNTHESIZED :  STD_LOGIC;
-SIGNAL	rd_adr_ALTERA_SYNTHESIZED :  STD_LOGIC_VECTOR(7 DOWNTO 0);
-SIGNAL	rd_data_sel_ALTERA_SYNTHESIZED :  STD_LOGIC;
-SIGNAL	rd_en_ALTERA_SYNTHESIZED :  STD_LOGIC;
-SIGNAL	rd_en_ALTERA_SYNTHESIZED1 :  STD_LOGIC;
-SIGNAL	rd_en_ALTERA_SYNTHESIZED2 :  STD_LOGIC;
-SIGNAL	rd_sel_ALTERA_SYNTHESIZED :  STD_LOGIC;
+SIGNAL	dout_t :  STD_LOGIC_VECTOR(15 DOWNTO 0);
+SIGNAL	ram_data_oe_t:  STD_LOGIC;
+SIGNAL	rd_adr_t :  STD_LOGIC_VECTOR(7 DOWNTO 0);
+SIGNAL	rd_data_sel_t :  STD_LOGIC;
+SIGNAL	rd_en_t:  STD_LOGIC;
+SIGNAL	rd_en_1 :  STD_LOGIC;
+SIGNAL	rd_en_2 :  STD_LOGIC;
+SIGNAL	rd_sel_t :  STD_LOGIC;
 SIGNAL	rd_sel_n :  STD_LOGIC;
-SIGNAL	wr_adr_ALTERA_SYNTHESIZED :  STD_LOGIC_VECTOR(7 DOWNTO 0);
-SIGNAL	wr_en_ALTERA_SYNTHESIZED :  STD_LOGIC;
-SIGNAL	wr_en_ALTERA_SYNTHESIZED1 :  STD_LOGIC;
-SIGNAL	wr_en_ALTERA_SYNTHESIZED2 :  STD_LOGIC;
-SIGNAL	wr_sel_ALTERA_SYNTHESIZED :  STD_LOGIC;
+SIGNAL	wr_adr_t :  STD_LOGIC_VECTOR(7 DOWNTO 0);
+SIGNAL	wr_en_t:  STD_LOGIC;
+SIGNAL	wr_en_1 :  STD_LOGIC;
+SIGNAL	wr_en_2 :  STD_LOGIC;
+SIGNAL	wr_sel_t :  STD_LOGIC;
 SIGNAL	wr_sel_n :  STD_LOGIC;
-SIGNAL	SYNTHESIZED_WIRE_0 :  STD_LOGIC_VECTOR(15 DOWNTO 0);
-SIGNAL	SYNTHESIZED_WIRE_1 :  STD_LOGIC_VECTOR(15 DOWNTO 0);
+SIGNAL	ram1_d_t :  STD_LOGIC_VECTOR(15 DOWNTO 0);
+SIGNAL	ram2_d_t :  STD_LOGIC_VECTOR(15 DOWNTO 0);
 
 
 BEGIN 
-ram1_d <= SYNTHESIZED_WIRE_0;
-ram2_d <= SYNTHESIZED_WIRE_1;
-
-
+dout <=dout_t;
+ram_data_oe <=ram_data_oe_t;
+rd_adr <=rd_adr_t;
+rd_data_sel<=rd_data_sel_t;
+rd_en<=rd_en_t;
+rd_sel <=rd_sel_t;
+wr_adr <=wr_adr_t;
+wr_en <= wr_en_t;
+wr_sel <=wr_sel_t;
+ram1_d <=ram1_d_t;
+ram2_d <=ram2_d_t;
 
 b2v_inst : ifft_ram_rd_ctr
 PORT MAP(rst_n => rst_n,
 		 clk => clk,
 		 sop => sop,
 		 eop => eop,
-		 rd_en => rd_en_ALTERA_SYNTHESIZED,
-		 rd_sel => rd_sel_ALTERA_SYNTHESIZED,
-		 rd_data_sel => rd_data_sel_ALTERA_SYNTHESIZED,
-		 oe => ram_data_oe_ALTERA_SYNTHESIZED,
+		 rd_en => rd_en_t,
+		 rd_sel => rd_sel_t,
+		 rd_data_sel => rd_data_sel_t,
+		 oe => ram_data_oe_t,
 		 rd_continue_o => rd_continue_o,
 		 flag_o1 => flag_o1,
 		 flag_eop => flag_eop,
-		 rd_adr => rd_adr_ALTERA_SYNTHESIZED,
+		 rd_adr => rd_adr_t,
 		 rd_cnt_o => rd_cnt_o);
 
 
@@ -145,67 +152,57 @@ PORT MAP(rst_n => rst_n,
 		 clk => clk,
 		 sop => sop,
 		 din => din,
-		 wr_en => wr_en_ALTERA_SYNTHESIZED,
-		 wr_sel => wr_sel_ALTERA_SYNTHESIZED,
-		 dout => dout_ALTERA_SYNTHESIZED,
-		 wr_adr => wr_adr_ALTERA_SYNTHESIZED);
+		 wr_en => wr_en_t,
+		 wr_sel => wr_sel_t,
+		 dout => dout_t,
+		 wr_adr => wr_adr_t);
 
 
-wr_en_ALTERA_SYNTHESIZED1 <= wr_en_ALTERA_SYNTHESIZED AND wr_sel_ALTERA_SYNTHESIZED;
+wr_en_1 <= wr_en_t AND wr_sel_t;
 
 
-wr_en_ALTERA_SYNTHESIZED2 <= wr_en_ALTERA_SYNTHESIZED AND wr_sel_n;
+wr_en_2 <= wr_en_t AND wr_sel_n;
 
 
-rd_en_ALTERA_SYNTHESIZED1 <= rd_en_ALTERA_SYNTHESIZED AND rd_sel_ALTERA_SYNTHESIZED;
+rd_en_1 <= rd_en_t AND rd_sel_t;
 
 
-rd_en_ALTERA_SYNTHESIZED2 <= rd_en_ALTERA_SYNTHESIZED AND rd_sel_n;
+rd_en_2 <= rd_en_t AND rd_sel_n;
 
 
 b2v_inst15 : d_sel
-PORT MAP(sel => rd_data_sel_ALTERA_SYNTHESIZED,
-		 oe => ram_data_oe_ALTERA_SYNTHESIZED,
-		 a => SYNTHESIZED_WIRE_0,
-		 b => SYNTHESIZED_WIRE_1,
+PORT MAP(sel => rd_data_sel_t,
+		 oe => ram_data_oe_t,
+		 a => ram1_d_t,
+		 b => ram2_d_t,
 		 c => rt);
 
 
 b2v_inst6 : ifft_ram
-PORT MAP(wren => wr_en_ALTERA_SYNTHESIZED1,
-		 rden => rd_en_ALTERA_SYNTHESIZED1,
+PORT MAP(wren => wr_en_1,
+		 rden => rd_en_1,
 		 clock => clk,
-		 data => dout_ALTERA_SYNTHESIZED,
-		 rdaddress => rd_adr_ALTERA_SYNTHESIZED,
-		 wraddress => wr_adr_ALTERA_SYNTHESIZED,
-		 q => SYNTHESIZED_WIRE_0);
+		 data => dout_t,
+		 rdaddress => rd_adr_t,
+		 wraddress => wr_adr_t,
+		 q => ram1_d_t);
 
 
 b2v_inst7 : ifft_ram
-PORT MAP(wren => wr_en_ALTERA_SYNTHESIZED2,
-		 rden => rd_en_ALTERA_SYNTHESIZED2,
+PORT MAP(wren => wr_en_2,
+		 rden => rd_en_2,
 		 clock => clk,
-		 data => dout_ALTERA_SYNTHESIZED,
-		 rdaddress => rd_adr_ALTERA_SYNTHESIZED,
-		 wraddress => wr_adr_ALTERA_SYNTHESIZED,
-		 q => SYNTHESIZED_WIRE_1);
+		 data => dout_t,
+		 rdaddress => rd_adr_t,
+		 wraddress => wr_adr_t,
+		 q => ram2_d_t);
 
 
-rd_sel_n <= NOT(rd_sel_ALTERA_SYNTHESIZED);
+rd_sel_n <= NOT(rd_sel_t);
 
 
 
-wr_sel_n <= NOT(wr_sel_ALTERA_SYNTHESIZED);
+wr_sel_n <= NOT(wr_sel_t);
 
-
-rd_en <= rd_en_ALTERA_SYNTHESIZED;
-rd_sel <= rd_sel_ALTERA_SYNTHESIZED;
-wr_en <= wr_en_ALTERA_SYNTHESIZED;
-wr_sel <= wr_sel_ALTERA_SYNTHESIZED;
-rd_data_sel <= rd_data_sel_ALTERA_SYNTHESIZED;
-ram_data_oe <= ram_data_oe_ALTERA_SYNTHESIZED;
-dout <= dout_ALTERA_SYNTHESIZED;
-rd_adr <= rd_adr_ALTERA_SYNTHESIZED;
-wr_adr <= wr_adr_ALTERA_SYNTHESIZED;
 
 END bdf_type;

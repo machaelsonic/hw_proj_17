@@ -187,7 +187,7 @@ END COMPONENT;
 SIGNAL	rst_n_tx_syn :  STD_LOGIC;
 SIGNAL	rst_rx_syn :  STD_LOGIC;
 SIGNAL	rst_tx :  STD_LOGIC;
-SIGNAL	tx_data_o_ALTERA_SYNTHESIZED :  STD_LOGIC_VECTOR(11 DOWNTO 0);
+SIGNAL	tx_data_t:  STD_LOGIC_VECTOR(11 DOWNTO 0);
 
 
 BEGIN 
@@ -197,7 +197,7 @@ BEGIN
 b2v_inst : receiver
 PORT MAP(clk => clk_tx,
 		 rst => rst_rx_syn,
-		 data_in => tx_data_o_ALTERA_SYNTHESIZED,
+		 data_in => tx_data_t,
 		 pre_cnt => pre_cnt,
 		 fft_sink_ready => fft_sink_ready,
 		 fft_source_sop => fft_source_sop,
@@ -271,7 +271,7 @@ PORT MAP(rst_n => rst_n_tx_syn,
 		 ram_wr_adr => ram_wr_adr,
 		 rd_cnt_o => rd_cnt_o,
 		 rom_rd_adr => rom_rd_adr,
-		 tx_data_o => tx_data_o_ALTERA_SYNTHESIZED);
+		 tx_data_o => tx_data_t);
 
 
 PROCESS(clk_tx)
@@ -293,6 +293,6 @@ END PROCESS;
 rst_tx <= NOT(rst_n_tx);
 
 
-tx_data_o <= tx_data_o_ALTERA_SYNTHESIZED;
+tx_data_o <= tx_data_t;
 
 END bdf_type;

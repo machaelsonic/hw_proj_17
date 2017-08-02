@@ -187,240 +187,163 @@ GENERIC (N : INTEGER
 END COMPONENT;
 
 SIGNAL	a_i :  STD_LOGIC_VECTOR(11 DOWNTO 0);
-SIGNAL	a_r_ALTERA_SYNTHESIZED :  STD_LOGIC_VECTOR(11 DOWNTO 0);
-SIGNAL	fft_data_valid_ALTERA_SYNTHESIZED :  STD_LOGIC;
-SIGNAL	fft_eop_ALTERA_SYNTHESIZED :  STD_LOGIC;
-SIGNAL	fft_sop_ALTERA_SYNTHESIZED :  STD_LOGIC;
-SIGNAL	fft_source_imag_ALTERA_SYNTHESIZED :  STD_LOGIC_VECTOR(11 DOWNTO 0);
-SIGNAL	fft_source_imag_delay_ALTERA_SYNTHESIZED0 :  STD_LOGIC;
-SIGNAL	fft_source_imag_delay_ALTERA_SYNTHESIZED1 :  STD_LOGIC;
-SIGNAL	fft_source_imag_delay_ALTERA_SYNTHESIZED10 :  STD_LOGIC;
-SIGNAL	fft_source_imag_delay_ALTERA_SYNTHESIZED11 :  STD_LOGIC;
-SIGNAL	fft_source_imag_delay_ALTERA_SYNTHESIZED110 :  STD_LOGIC;
-SIGNAL	fft_source_imag_delay_ALTERA_SYNTHESIZED111 :  STD_LOGIC;
-SIGNAL	fft_source_imag_delay_ALTERA_SYNTHESIZED12 :  STD_LOGIC;
-SIGNAL	fft_source_imag_delay_ALTERA_SYNTHESIZED13 :  STD_LOGIC;
-SIGNAL	fft_source_imag_delay_ALTERA_SYNTHESIZED14 :  STD_LOGIC;
-SIGNAL	fft_source_imag_delay_ALTERA_SYNTHESIZED15 :  STD_LOGIC;
-SIGNAL	fft_source_imag_delay_ALTERA_SYNTHESIZED16 :  STD_LOGIC;
-SIGNAL	fft_source_imag_delay_ALTERA_SYNTHESIZED17 :  STD_LOGIC;
-SIGNAL	fft_source_imag_delay_ALTERA_SYNTHESIZED18 :  STD_LOGIC;
-SIGNAL	fft_source_imag_delay_ALTERA_SYNTHESIZED19 :  STD_LOGIC;
-SIGNAL	fft_source_imag_delay_ALTERA_SYNTHESIZED2 :  STD_LOGIC;
-SIGNAL	fft_source_imag_delay_ALTERA_SYNTHESIZED3 :  STD_LOGIC;
-SIGNAL	fft_source_imag_delay_ALTERA_SYNTHESIZED4 :  STD_LOGIC;
-SIGNAL	fft_source_imag_delay_ALTERA_SYNTHESIZED5 :  STD_LOGIC;
-SIGNAL	fft_source_imag_delay_ALTERA_SYNTHESIZED6 :  STD_LOGIC;
-SIGNAL	fft_source_imag_delay_ALTERA_SYNTHESIZED7 :  STD_LOGIC;
-SIGNAL	fft_source_imag_delay_ALTERA_SYNTHESIZED8 :  STD_LOGIC;
-SIGNAL	fft_source_imag_delay_ALTERA_SYNTHESIZED9 :  STD_LOGIC;
-SIGNAL	fft_source_real_ALTERA_SYNTHESIZED :  STD_LOGIC_VECTOR(11 DOWNTO 0);
-SIGNAL	fft_source_real_delay_ALTERA_SYNTHESIZED0 :  STD_LOGIC;
-SIGNAL	fft_source_real_delay_ALTERA_SYNTHESIZED1 :  STD_LOGIC;
-SIGNAL	fft_source_real_delay_ALTERA_SYNTHESIZED10 :  STD_LOGIC;
-SIGNAL	fft_source_real_delay_ALTERA_SYNTHESIZED11 :  STD_LOGIC;
-SIGNAL	fft_source_real_delay_ALTERA_SYNTHESIZED110 :  STD_LOGIC;
-SIGNAL	fft_source_real_delay_ALTERA_SYNTHESIZED111 :  STD_LOGIC;
-SIGNAL	fft_source_real_delay_ALTERA_SYNTHESIZED12 :  STD_LOGIC;
-SIGNAL	fft_source_real_delay_ALTERA_SYNTHESIZED13 :  STD_LOGIC;
-SIGNAL	fft_source_real_delay_ALTERA_SYNTHESIZED14 :  STD_LOGIC;
-SIGNAL	fft_source_real_delay_ALTERA_SYNTHESIZED15 :  STD_LOGIC;
-SIGNAL	fft_source_real_delay_ALTERA_SYNTHESIZED16 :  STD_LOGIC;
-SIGNAL	fft_source_real_delay_ALTERA_SYNTHESIZED17 :  STD_LOGIC;
-SIGNAL	fft_source_real_delay_ALTERA_SYNTHESIZED18 :  STD_LOGIC;
-SIGNAL	fft_source_real_delay_ALTERA_SYNTHESIZED19 :  STD_LOGIC;
-SIGNAL	fft_source_real_delay_ALTERA_SYNTHESIZED2 :  STD_LOGIC;
-SIGNAL	fft_source_real_delay_ALTERA_SYNTHESIZED3 :  STD_LOGIC;
-SIGNAL	fft_source_real_delay_ALTERA_SYNTHESIZED4 :  STD_LOGIC;
-SIGNAL	fft_source_real_delay_ALTERA_SYNTHESIZED5 :  STD_LOGIC;
-SIGNAL	fft_source_real_delay_ALTERA_SYNTHESIZED6 :  STD_LOGIC;
-SIGNAL	fft_source_real_delay_ALTERA_SYNTHESIZED7 :  STD_LOGIC;
-SIGNAL	fft_source_real_delay_ALTERA_SYNTHESIZED8 :  STD_LOGIC;
-SIGNAL	fft_source_real_delay_ALTERA_SYNTHESIZED9 :  STD_LOGIC;
-SIGNAL	fft_source_sop_ALTERA_SYNTHESIZED :  STD_LOGIC;
-SIGNAL	fft_source_valid_ALTERA_SYNTHESIZED :  STD_LOGIC;
-SIGNAL	pre_cnt_ALTERA_SYNTHESIZED :  STD_LOGIC;
-SIGNAL	rcv_data_ALTERA_SYNTHESIZED :  STD_LOGIC_VECTOR(11 DOWNTO 0);
-SIGNAL	rcv_data_delay_ALTERA_SYNTHESIZED :  STD_LOGIC_VECTOR(11 DOWNTO 0);
-SIGNAL	rst_n :  STD_LOGIC;
-SIGNAL	rt_i_ALTERA_SYNTHESIZED :  STD_LOGIC_VECTOR(24 DOWNTO 0);
-SIGNAL	rt_r_ALTERA_SYNTHESIZED :  STD_LOGIC_VECTOR(24 DOWNTO 0);
-SIGNAL	x_cor_ALTERA_SYNTHESIZED2 :  STD_LOGIC_VECTOR(20 DOWNTO 0);
-SIGNAL	SYNTHESIZED_WIRE_0 :  STD_LOGIC_VECTOR(11 DOWNTO 0);
-SIGNAL	SYNTHESIZED_WIRE_1 :  STD_LOGIC;
-SIGNAL	SYNTHESIZED_WIRE_2 :  STD_LOGIC;
-SIGNAL	SYNTHESIZED_WIRE_3 :  STD_LOGIC_VECTOR(0 TO 1);
-SIGNAL	SYNTHESIZED_WIRE_4 :  STD_LOGIC_VECTOR(0 TO 11);
-SIGNAL	SYNTHESIZED_WIRE_12 :  STD_LOGIC;
-SIGNAL	SYNTHESIZED_WIRE_7 :  STD_LOGIC;
-SIGNAL	SYNTHESIZED_WIRE_8 :  STD_LOGIC;
-SIGNAL	SYNTHESIZED_WIRE_9 :  STD_LOGIC_VECTOR(35 DOWNTO 0);
-SIGNAL	SYNTHESIZED_WIRE_13 :  STD_LOGIC;
-
-SIGNAL	GDFX_TEMP_SIGNAL_2 :  STD_LOGIC_VECTOR(11 DOWNTO 0);
-SIGNAL	GDFX_TEMP_SIGNAL_4 :  STD_LOGIC_VECTOR(11 DOWNTO 0);
-SIGNAL	GDFX_TEMP_SIGNAL_7 :  STD_LOGIC_VECTOR(11 DOWNTO 0);
-SIGNAL	GDFX_TEMP_SIGNAL_0 :  STD_LOGIC_VECTOR(11 DOWNTO 0);
-SIGNAL	GDFX_TEMP_SIGNAL_3 :  STD_LOGIC_VECTOR(11 DOWNTO 0);
-SIGNAL	GDFX_TEMP_SIGNAL_5 :  STD_LOGIC_VECTOR(11 DOWNTO 0);
-SIGNAL	GDFX_TEMP_SIGNAL_6 :  STD_LOGIC_VECTOR(11 DOWNTO 0);
-SIGNAL	GDFX_TEMP_SIGNAL_1 :  STD_LOGIC_VECTOR(11 DOWNTO 0);
+SIGNAL	a_r_t :  STD_LOGIC_VECTOR(11 DOWNTO 0);
+SIGNAL	fft_data_valid_t :  STD_LOGIC;
+SIGNAL	fft_eop_t:  STD_LOGIC;
+SIGNAL	fft_sop_t:  STD_LOGIC;
+SIGNAL	fft_source_imag_t:  STD_LOGIC_VECTOR(11 DOWNTO 0);
+SIGNAL	fft_source_real_t:  STD_LOGIC_VECTOR(11 DOWNTO 0);
+SIGNAL	fft_source_sop_t:  STD_LOGIC;
+SIGNAL	fft_source_valid_t:  STD_LOGIC;
+SIGNAL	pre_cnt_t :  STD_LOGIC;
+SIGNAL	rcv_data_t:  STD_LOGIC_VECTOR(11 DOWNTO 0);
+SIGNAL	rcv_data_delay_t:  STD_LOGIC_VECTOR(11 DOWNTO 0);
+SIGNAL	rst_n:  STD_LOGIC;
+SIGNAL	rt_i_t:  STD_LOGIC_VECTOR(24 DOWNTO 0);
+SIGNAL	rt_r_t :  STD_LOGIC_VECTOR(24 DOWNTO 0);
+SIGNAL	x_cor2_t :  STD_LOGIC_VECTOR(20 DOWNTO 0);
+signal   fft_source_imag_delay_1_t:std_logic_vector(11 downto 0);
+signal   fft_source_imag_delay_t:std_logic_vector(11 downto 0);
+signal   fft_source_imag_delay_n:std_logic_vector(11 downto 0);
+signal   fft_source_real_delay_1_t:std_logic_vector(11 downto 0);
+signal   fft_source_real_delay_t:std_logic_vector(11 downto 0);
+signal   demap_sink_v:std_logic;
+signal   demap_d:std_logic_vector(35 downto 0);
+signal   demap_sink_eop_t:std_logic;
 
 BEGIN 
-demap_sink_eop <= SYNTHESIZED_WIRE_7;
-SYNTHESIZED_WIRE_1 <= '1';
-SYNTHESIZED_WIRE_2 <= '0';
-SYNTHESIZED_WIRE_3 <= "00";
-SYNTHESIZED_WIRE_4 <= "000000000000";
-SYNTHESIZED_WIRE_12 <= '1';
-SYNTHESIZED_WIRE_13 <= '1';
-
-fft_source_real_delay_ALTERA_SYNTHESIZED111 <= GDFX_TEMP_SIGNAL_2(11);
-fft_source_real_delay_ALTERA_SYNTHESIZED110 <= GDFX_TEMP_SIGNAL_2(10);
-fft_source_real_delay_ALTERA_SYNTHESIZED19 <= GDFX_TEMP_SIGNAL_2(9);
-fft_source_real_delay_ALTERA_SYNTHESIZED18 <= GDFX_TEMP_SIGNAL_2(8);
-fft_source_real_delay_ALTERA_SYNTHESIZED17 <= GDFX_TEMP_SIGNAL_2(7);
-fft_source_real_delay_ALTERA_SYNTHESIZED16 <= GDFX_TEMP_SIGNAL_2(6);
-fft_source_real_delay_ALTERA_SYNTHESIZED15 <= GDFX_TEMP_SIGNAL_2(5);
-fft_source_real_delay_ALTERA_SYNTHESIZED14 <= GDFX_TEMP_SIGNAL_2(4);
-fft_source_real_delay_ALTERA_SYNTHESIZED13 <= GDFX_TEMP_SIGNAL_2(3);
-fft_source_real_delay_ALTERA_SYNTHESIZED12 <= GDFX_TEMP_SIGNAL_2(2);
-fft_source_real_delay_ALTERA_SYNTHESIZED11 <= GDFX_TEMP_SIGNAL_2(1);
-fft_source_real_delay_ALTERA_SYNTHESIZED10 <= GDFX_TEMP_SIGNAL_2(0);
-
-GDFX_TEMP_SIGNAL_4 <= (fft_source_real_delay_ALTERA_SYNTHESIZED111 & fft_source_real_delay_ALTERA_SYNTHESIZED110 & fft_source_real_delay_ALTERA_SYNTHESIZED19 & fft_source_real_delay_ALTERA_SYNTHESIZED18 & fft_source_real_delay_ALTERA_SYNTHESIZED17 & fft_source_real_delay_ALTERA_SYNTHESIZED16 & fft_source_real_delay_ALTERA_SYNTHESIZED15 & fft_source_real_delay_ALTERA_SYNTHESIZED14 & fft_source_real_delay_ALTERA_SYNTHESIZED13 & fft_source_real_delay_ALTERA_SYNTHESIZED12 & fft_source_real_delay_ALTERA_SYNTHESIZED11 & fft_source_real_delay_ALTERA_SYNTHESIZED10);
-GDFX_TEMP_SIGNAL_7 <= (fft_source_real_delay_ALTERA_SYNTHESIZED111 & fft_source_real_delay_ALTERA_SYNTHESIZED110 & fft_source_real_delay_ALTERA_SYNTHESIZED19 & fft_source_real_delay_ALTERA_SYNTHESIZED18 & fft_source_real_delay_ALTERA_SYNTHESIZED17 & fft_source_real_delay_ALTERA_SYNTHESIZED16 & fft_source_real_delay_ALTERA_SYNTHESIZED15 & fft_source_real_delay_ALTERA_SYNTHESIZED14 & fft_source_real_delay_ALTERA_SYNTHESIZED13 & fft_source_real_delay_ALTERA_SYNTHESIZED12 & fft_source_real_delay_ALTERA_SYNTHESIZED11 & fft_source_real_delay_ALTERA_SYNTHESIZED10);
-GDFX_TEMP_SIGNAL_0 <= (fft_source_real_delay_ALTERA_SYNTHESIZED11 & fft_source_real_delay_ALTERA_SYNTHESIZED10 & fft_source_real_delay_ALTERA_SYNTHESIZED9 & fft_source_real_delay_ALTERA_SYNTHESIZED8 & fft_source_real_delay_ALTERA_SYNTHESIZED7 & fft_source_real_delay_ALTERA_SYNTHESIZED6 & fft_source_real_delay_ALTERA_SYNTHESIZED5 & fft_source_real_delay_ALTERA_SYNTHESIZED4 & fft_source_real_delay_ALTERA_SYNTHESIZED3 & fft_source_real_delay_ALTERA_SYNTHESIZED2 & fft_source_real_delay_ALTERA_SYNTHESIZED1 & fft_source_real_delay_ALTERA_SYNTHESIZED0);
-fft_source_imag_delay_ALTERA_SYNTHESIZED111 <= GDFX_TEMP_SIGNAL_3(11);
-fft_source_imag_delay_ALTERA_SYNTHESIZED110 <= GDFX_TEMP_SIGNAL_3(10);
-fft_source_imag_delay_ALTERA_SYNTHESIZED19 <= GDFX_TEMP_SIGNAL_3(9);
-fft_source_imag_delay_ALTERA_SYNTHESIZED18 <= GDFX_TEMP_SIGNAL_3(8);
-fft_source_imag_delay_ALTERA_SYNTHESIZED17 <= GDFX_TEMP_SIGNAL_3(7);
-fft_source_imag_delay_ALTERA_SYNTHESIZED16 <= GDFX_TEMP_SIGNAL_3(6);
-fft_source_imag_delay_ALTERA_SYNTHESIZED15 <= GDFX_TEMP_SIGNAL_3(5);
-fft_source_imag_delay_ALTERA_SYNTHESIZED14 <= GDFX_TEMP_SIGNAL_3(4);
-fft_source_imag_delay_ALTERA_SYNTHESIZED13 <= GDFX_TEMP_SIGNAL_3(3);
-fft_source_imag_delay_ALTERA_SYNTHESIZED12 <= GDFX_TEMP_SIGNAL_3(2);
-fft_source_imag_delay_ALTERA_SYNTHESIZED11 <= GDFX_TEMP_SIGNAL_3(1);
-fft_source_imag_delay_ALTERA_SYNTHESIZED10 <= GDFX_TEMP_SIGNAL_3(0);
-
-GDFX_TEMP_SIGNAL_5 <= (fft_source_imag_delay_ALTERA_SYNTHESIZED111 & fft_source_imag_delay_ALTERA_SYNTHESIZED110 & fft_source_imag_delay_ALTERA_SYNTHESIZED19 & fft_source_imag_delay_ALTERA_SYNTHESIZED18 & fft_source_imag_delay_ALTERA_SYNTHESIZED17 & fft_source_imag_delay_ALTERA_SYNTHESIZED16 & fft_source_imag_delay_ALTERA_SYNTHESIZED15 & fft_source_imag_delay_ALTERA_SYNTHESIZED14 & fft_source_imag_delay_ALTERA_SYNTHESIZED13 & fft_source_imag_delay_ALTERA_SYNTHESIZED12 & fft_source_imag_delay_ALTERA_SYNTHESIZED11 & fft_source_imag_delay_ALTERA_SYNTHESIZED10);
-GDFX_TEMP_SIGNAL_6 <= (fft_source_imag_delay_ALTERA_SYNTHESIZED111 & fft_source_imag_delay_ALTERA_SYNTHESIZED110 & fft_source_imag_delay_ALTERA_SYNTHESIZED19 & fft_source_imag_delay_ALTERA_SYNTHESIZED18 & fft_source_imag_delay_ALTERA_SYNTHESIZED17 & fft_source_imag_delay_ALTERA_SYNTHESIZED16 & fft_source_imag_delay_ALTERA_SYNTHESIZED15 & fft_source_imag_delay_ALTERA_SYNTHESIZED14 & fft_source_imag_delay_ALTERA_SYNTHESIZED13 & fft_source_imag_delay_ALTERA_SYNTHESIZED12 & fft_source_imag_delay_ALTERA_SYNTHESIZED11 & fft_source_imag_delay_ALTERA_SYNTHESIZED10);
-GDFX_TEMP_SIGNAL_1 <= (fft_source_imag_delay_ALTERA_SYNTHESIZED11 & fft_source_imag_delay_ALTERA_SYNTHESIZED10 & fft_source_imag_delay_ALTERA_SYNTHESIZED9 & fft_source_imag_delay_ALTERA_SYNTHESIZED8 & fft_source_imag_delay_ALTERA_SYNTHESIZED7 & fft_source_imag_delay_ALTERA_SYNTHESIZED6 & fft_source_imag_delay_ALTERA_SYNTHESIZED5 & fft_source_imag_delay_ALTERA_SYNTHESIZED4 & fft_source_imag_delay_ALTERA_SYNTHESIZED3 & fft_source_imag_delay_ALTERA_SYNTHESIZED2 & fft_source_imag_delay_ALTERA_SYNTHESIZED1 & fft_source_imag_delay_ALTERA_SYNTHESIZED0);
 
 
 b2v_inst : x_cor
 PORT MAP(rst_n => rst_n,
 		 clk => clk,
-		 din => rcv_data_ALTERA_SYNTHESIZED,
+		 din => rcv_data_t,
 		 dout1 => x_cor1,
-		 dout2 => x_cor_ALTERA_SYNTHESIZED2);
+		 dout2 => x_cor2_t);
 
 
 b2v_inst1 : div
 PORT MAP(rst_n => rst_n,
 		 clk => clk,
-		 din2 => x_cor_ALTERA_SYNTHESIZED2,
-		 pre_cnt_o => pre_cnt_ALTERA_SYNTHESIZED,
+		 din2 => x_cor2_t,
+		 pre_cnt_o => pre_cnt_t,
 		 cnt_o => cnt_o,
 		 max_p => max_p,
 		 max_value => max_value,
 		 p_cnt_o => p_cnt_o,
 		 syn_point => syn_point);
 
-
+x_cor2<=x_cor2_t;
 
 
 b2v_inst2 : sop_eop_gen
 PORT MAP(rst_n => rst_n,
 		 clk => clk,
-		 pre_cnt => pre_cnt_ALTERA_SYNTHESIZED,
-		 sop => fft_sop_ALTERA_SYNTHESIZED,
-		 eop => fft_eop_ALTERA_SYNTHESIZED,
-		 data_valid => fft_data_valid_ALTERA_SYNTHESIZED);
+		 pre_cnt => pre_cnt_t,
+		 sop => fft_sop_t,
+		 eop => fft_eop_t,
+		 data_valid => fft_data_valid_t);
+pre_cnt<=pre_cnt_t;
+fft_sop<=fft_sop_t;
+fft_eop<=fft_eop_t;
+fft_data_valid<=fft_data_valid_t;
+
 
 
 b2v_inst28 : mult_complex_ip
 PORT MAP(dataa_imag => a_i,
-		 dataa_real => a_r_ALTERA_SYNTHESIZED,
-		 datab_imag => SYNTHESIZED_WIRE_0,
-		 datab_real => GDFX_TEMP_SIGNAL_0,
-		 result_imag => rt_i_ALTERA_SYNTHESIZED,
-		 result_real => rt_r_ALTERA_SYNTHESIZED);
+		 dataa_real => a_r_t,
+		 datab_imag => fft_source_imag_delay_n,
+		 datab_real => fft_source_real_delay_t,
+		 result_imag => rt_i_t,
+		 result_real => rt_r_t);
 
+rt_i<=rt_i_t;
+rt_r<=rt_r_t;
 
 b2v_inst29 : add_ip
-PORT MAP(datab => GDFX_TEMP_SIGNAL_1,
-		 result => SYNTHESIZED_WIRE_0);
+PORT MAP(datab => fft_source_imag_delay_t,
+		 result =>fft_source_imag_delay_n);
 
 
 b2v_inst3 : fft_ip
 PORT MAP(clk => clk,
 		 reset_n => rst_n,
-		 clk_ena => SYNTHESIZED_WIRE_1,
-		 inverse => SYNTHESIZED_WIRE_2,
-		 sink_valid => fft_data_valid_ALTERA_SYNTHESIZED,
-		 sink_sop => fft_sop_ALTERA_SYNTHESIZED,
-		 sink_eop => fft_eop_ALTERA_SYNTHESIZED,
-		 source_ready => fft_source_valid_ALTERA_SYNTHESIZED,
-		 sink_error => SYNTHESIZED_WIRE_3,
-		 sink_imag => SYNTHESIZED_WIRE_4,
-		 sink_real => rcv_data_delay_ALTERA_SYNTHESIZED,
+		 clk_ena => '1',
+		 inverse => '0',
+		 sink_valid => fft_data_valid_t,
+		 sink_sop => fft_sop_t,
+		 sink_eop => fft_eop_t,
+		 source_ready => fft_source_valid_t,
+		 sink_error =>"00",
+		 sink_imag => (others=>'0'),
+		 sink_real => rcv_data_delay_t,
 		 sink_ready => fft_sink_ready,
-		 source_sop => fft_source_sop_ALTERA_SYNTHESIZED,
+		 source_sop => fft_source_sop_t,
 		 source_eop => fft_source_eop,
-		 source_valid => fft_source_valid_ALTERA_SYNTHESIZED,
+		 source_valid => fft_source_valid_t,
 		 source_error => fft_source_eeror,
 		 source_exp => fft_source_exp,
-		 source_imag => fft_source_imag_ALTERA_SYNTHESIZED,
-		 source_real => fft_source_real_ALTERA_SYNTHESIZED);
+		 source_imag => fft_source_imag_t,
+		 source_real => fft_source_real_t);
 
-
-
+     rcv_data_delay<=rcv_data_delay_t;
+     fft_source_valid<=fft_source_valid_t;
+	  fft_source_sop<=fft_source_sop_t;
+	  fft_source_imag<=fft_source_imag_t;
+	  fft_source_real<=fft_source_real_t;
+	  fft_source_imag_delay_1<=fft_source_imag_delay_1_t;
+	  fft_source_real_delay_1<=fft_source_real_delay_1_t;
+	  fft_source_real_delay<=fft_source_real_delay_t;
+	  fft_source_imag_delay<=fft_source_imag_delay_t;
+	  
+	  
 b2v_inst32 : fifo_ip
-PORT MAP(wrreq => SYNTHESIZED_WIRE_12,
-		 rdreq => SYNTHESIZED_WIRE_12,
+PORT MAP(wrreq => '1',
+		 rdreq => '1',
 		 clock => clk,
 		 aclr => rst,
-		 data => rcv_data_ALTERA_SYNTHESIZED,
-		 q => rcv_data_delay_ALTERA_SYNTHESIZED);
+		 data => rcv_data_t,
+		 q => rcv_data_delay_t);
 
 
 b2v_inst33 : fifo_ip
-PORT MAP(wrreq => fft_source_valid_ALTERA_SYNTHESIZED,
-		 rdreq => fft_source_valid_ALTERA_SYNTHESIZED,
+PORT MAP(wrreq => fft_source_valid_t,
+		 rdreq => fft_source_valid_t,
 		 clock => clk,
 		 aclr => rst,
-		 data => fft_source_real_ALTERA_SYNTHESIZED,
-		 q => GDFX_TEMP_SIGNAL_2);
+		 data => fft_source_real_t,
+		 q => fft_source_real_delay_1_t);
 
 
 b2v_inst34 : fifo_ip
-PORT MAP(wrreq => fft_source_valid_ALTERA_SYNTHESIZED,
-		 rdreq => fft_source_valid_ALTERA_SYNTHESIZED,
+PORT MAP(wrreq => fft_source_valid_t,
+		 rdreq => fft_source_valid_t,
 		 clock => clk,
 		 aclr => rst,
-		 data => fft_source_imag_ALTERA_SYNTHESIZED,
-		 q => GDFX_TEMP_SIGNAL_3);
+		 data => fft_source_imag_t,
+		 q => fft_source_imag_delay_1_t);
 
 
 b2v_inst35 : fifo_ip
-PORT MAP(wrreq => fft_source_valid_ALTERA_SYNTHESIZED,
-		 rdreq => fft_source_valid_ALTERA_SYNTHESIZED,
+PORT MAP(wrreq => fft_source_valid_t,
+		 rdreq => fft_source_valid_t,
 		 clock => clk,
 		 aclr => rst,
-		 data => GDFX_TEMP_SIGNAL_4,
-		 q => fft_source_real_delay);
+		 data => fft_source_real_delay_1_t,
+		 q => fft_source_real_delay_t);
 
 
 b2v_inst36 : fifo_ip
-PORT MAP(wrreq => fft_source_valid_ALTERA_SYNTHESIZED,
-		 rdreq => fft_source_valid_ALTERA_SYNTHESIZED,
+PORT MAP(wrreq => fft_source_valid_t,
+		 rdreq => fft_source_valid_t,
 		 clock => clk,
 		 aclr => rst,
-		 data => GDFX_TEMP_SIGNAL_5,
-		 q => fft_source_imag_delay);
+		 data => fft_source_imag_delay_1_t,
+		 q => fft_source_imag_delay_t);
 
+		 
+		 
 
 rst_n <= NOT(rst);
 
@@ -429,22 +352,24 @@ rst_n <= NOT(rst);
 b2v_inst5 : data_out
 PORT MAP(rst_n => rst_n,
 		 clk => clk,
-		 sink_eop => SYNTHESIZED_WIRE_7,
-		 sink_valid => SYNTHESIZED_WIRE_8,
-		 din => SYNTHESIZED_WIRE_9,
+		 sink_eop => demap_sink_eop_t,
+		 sink_valid => demap_sink_v,
+		 din => demap_d,
 		 data_valid => demap_sink_valid,
 		 dout => demap_dout);
 
-
+demap_sink_eop<=demap_sink_eop_t;
 
 
 b2v_inst8 : fifo_ip_8
-PORT MAP(wrreq => SYNTHESIZED_WIRE_13,
-		 rdreq => SYNTHESIZED_WIRE_13,
+PORT MAP(wrreq => '1',
+		 rdreq => '1',
 		 clock => clk,
 		 aclr => rst,
 		 data => data_in,
-		 q => rcv_data_ALTERA_SYNTHESIZED);
+		 q => rcv_data_t);
+		 
+		 rcv_data<=rcv_data_t;
 
 
 
@@ -453,56 +378,20 @@ GENERIC MAP(N => 33
 			)
 PORT MAP(rst_n => rst_n,
 		 clk => clk,
-		 source_valid => fft_source_valid_ALTERA_SYNTHESIZED,
-		 source_sop => fft_source_sop_ALTERA_SYNTHESIZED,
-		 din_imag => GDFX_TEMP_SIGNAL_6,
-		 din_imag_clc => rt_i_ALTERA_SYNTHESIZED,
-		 din_real => GDFX_TEMP_SIGNAL_7,
-		 din_real_clc => rt_r_ALTERA_SYNTHESIZED,
+		 source_valid => fft_source_valid_t,
+		 source_sop => fft_source_sop_t,
+		 din_imag => fft_source_imag_delay_1_t,
+		 din_imag_clc => rt_i_t,
+		 din_real => fft_source_real_delay_1_t,
+		 din_real_clc => rt_r_t,
 		 sink_sop => demap_sink_sop,
-		 sink_eop => SYNTHESIZED_WIRE_7,
-		 sink_valid => SYNTHESIZED_WIRE_8,
-		 dout => SYNTHESIZED_WIRE_9,
+		 sink_eop => demap_sink_eop_t,
+		 sink_valid => demap_sink_v,
+		 dout => demap_d,
 		 dout_imag => a_i,
-		 dout_real => a_r_ALTERA_SYNTHESIZED);
+		 dout_real => a_r_t);
+		 
+		 
+  a_r<=a_r_t;
 
-fft_source_sop <= fft_source_sop_ALTERA_SYNTHESIZED;
-fft_source_valid <= fft_source_valid_ALTERA_SYNTHESIZED;
-pre_cnt <= pre_cnt_ALTERA_SYNTHESIZED;
-fft_sop <= fft_sop_ALTERA_SYNTHESIZED;
-fft_eop <= fft_eop_ALTERA_SYNTHESIZED;
-fft_data_valid <= fft_data_valid_ALTERA_SYNTHESIZED;
-a_r <= a_r_ALTERA_SYNTHESIZED;
-fft_source_imag <= fft_source_imag_ALTERA_SYNTHESIZED;
-fft_source_real <= fft_source_real_ALTERA_SYNTHESIZED;
-rcv_data <= rcv_data_ALTERA_SYNTHESIZED;
-rcv_data_delay <= rcv_data_delay_ALTERA_SYNTHESIZED;
-rt_i <= rt_i_ALTERA_SYNTHESIZED;
-rt_r <= rt_r_ALTERA_SYNTHESIZED;
-x_cor2 <= x_cor_ALTERA_SYNTHESIZED2;
-
-fft_source_imag_delay_ALTERA_SYNTHESIZED10 <= GDFX_TEMP_SIGNAL_3(0);
-fft_source_imag_delay_ALTERA_SYNTHESIZED11 <= GDFX_TEMP_SIGNAL_3(1);
-fft_source_imag_delay_ALTERA_SYNTHESIZED110 <= GDFX_TEMP_SIGNAL_3(10);
-fft_source_imag_delay_ALTERA_SYNTHESIZED111 <= GDFX_TEMP_SIGNAL_3(11);
-fft_source_imag_delay_ALTERA_SYNTHESIZED12 <= GDFX_TEMP_SIGNAL_3(2);
-fft_source_imag_delay_ALTERA_SYNTHESIZED13 <= GDFX_TEMP_SIGNAL_3(3);
-fft_source_imag_delay_ALTERA_SYNTHESIZED14 <= GDFX_TEMP_SIGNAL_3(4);
-fft_source_imag_delay_ALTERA_SYNTHESIZED15 <= GDFX_TEMP_SIGNAL_3(5);
-fft_source_imag_delay_ALTERA_SYNTHESIZED16 <= GDFX_TEMP_SIGNAL_3(6);
-fft_source_imag_delay_ALTERA_SYNTHESIZED17 <= GDFX_TEMP_SIGNAL_3(7);
-fft_source_imag_delay_ALTERA_SYNTHESIZED18 <= GDFX_TEMP_SIGNAL_3(8);
-fft_source_imag_delay_ALTERA_SYNTHESIZED19 <= GDFX_TEMP_SIGNAL_3(9);
-fft_source_real_delay_ALTERA_SYNTHESIZED10 <= GDFX_TEMP_SIGNAL_2(0);
-fft_source_real_delay_ALTERA_SYNTHESIZED11 <= GDFX_TEMP_SIGNAL_2(1);
-fft_source_real_delay_ALTERA_SYNTHESIZED110 <= GDFX_TEMP_SIGNAL_2(10);
-fft_source_real_delay_ALTERA_SYNTHESIZED111 <= GDFX_TEMP_SIGNAL_2(11);
-fft_source_real_delay_ALTERA_SYNTHESIZED12 <= GDFX_TEMP_SIGNAL_2(2);
-fft_source_real_delay_ALTERA_SYNTHESIZED13 <= GDFX_TEMP_SIGNAL_2(3);
-fft_source_real_delay_ALTERA_SYNTHESIZED14 <= GDFX_TEMP_SIGNAL_2(4);
-fft_source_real_delay_ALTERA_SYNTHESIZED15 <= GDFX_TEMP_SIGNAL_2(5);
-fft_source_real_delay_ALTERA_SYNTHESIZED16 <= GDFX_TEMP_SIGNAL_2(6);
-fft_source_real_delay_ALTERA_SYNTHESIZED17 <= GDFX_TEMP_SIGNAL_2(7);
-fft_source_real_delay_ALTERA_SYNTHESIZED18 <= GDFX_TEMP_SIGNAL_2(8);
-fft_source_real_delay_ALTERA_SYNTHESIZED19 <= GDFX_TEMP_SIGNAL_2(9);
 END bdf_type;

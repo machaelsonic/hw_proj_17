@@ -104,15 +104,16 @@ END COMPONENT;
 COMPONENT ifft_data_gen
 GENERIC (N : INTEGER
 			);
-	PORT(rst_n : IN STD_LOGIC;
-		 clk : IN STD_LOGIC;
-		 source_data_valid : IN STD_LOGIC;
-		 din : IN STD_LOGIC_VECTOR(35 DOWNTO 0);
-		 sink_data_valid : OUT STD_LOGIC;
-		 sop : OUT STD_LOGIC;
-		 eop : OUT STD_LOGIC;
-		 dout_imag : OUT STD_LOGIC_VECTOR(11 DOWNTO 0);
-		 dout_real : OUT STD_LOGIC_VECTOR(11 DOWNTO 0)
+	port(rst_n: in std_logic;
+       clk: in std_logic;
+       din: in std_logic_vector(35 downto 0);
+       source_data_valid:in std_logic;
+	   ifft_sink_ready: in std_logic;
+       sink_data_valid:out std_logic;
+       sop:out std_logic;
+       eop:out std_logic;
+       dout_real:out std_logic_vector(11 downto 0);
+       dout_imag:out std_logic_vector(11 downto 0)
 	);
 END COMPONENT;
 
@@ -169,61 +170,74 @@ COMPONENT tx_ctr
 	);
 END COMPONENT;
 
-SIGNAL	ifft_data_valid_ALTERA_SYNTHESIZED :  STD_LOGIC;
-SIGNAL	ifft_dout_imag_ALTERA_SYNTHESIZED :  STD_LOGIC_VECTOR(11 DOWNTO 0);
-SIGNAL	ifft_dout_real_ALTERA_SYNTHESIZED :  STD_LOGIC_VECTOR(11 DOWNTO 0);
-SIGNAL	ifft_eop_ALTERA_SYNTHESIZED :  STD_LOGIC;
-SIGNAL	ifft_sop_ALTERA_SYNTHESIZED :  STD_LOGIC;
-SIGNAL	ifft_source_eop_ALTERA_SYNTHESIZED :  STD_LOGIC;
-SIGNAL	ifft_source_ready :  STD_LOGIC;
-SIGNAL	ifft_source_real_ALTERA_SYNTHESIZED :  STD_LOGIC_VECTOR(11 DOWNTO 0);
-SIGNAL	ifft_source_sop_ALTERA_SYNTHESIZED :  STD_LOGIC;
-SIGNAL	iift_source_eop :  STD_LOGIC;
-SIGNAL	pre_win_data_ALTERA_SYNTHESIZED :  STD_LOGIC_VECTOR(11 DOWNTO 0);
-SIGNAL	pre_win_data_valid_ALTERA_SYNTHESIZED :  STD_LOGIC;
-SIGNAL	ram_data_valid_ALTERA_SYNTHESIZED :  STD_LOGIC;
-SIGNAL	ram_rd_data_ALTERA_SYNTHESIZED :  STD_LOGIC_VECTOR(15 DOWNTO 0);
-SIGNAL	rom_rd_adr_ALTERA_SYNTHESIZED :  STD_LOGIC_VECTOR(7 DOWNTO 0);
-SIGNAL	rom_rd_en_ALTERA_SYNTHESIZED :  STD_LOGIC;
-SIGNAL	send_data_valid_ALTERA_SYNTHESIZED :  STD_LOGIC;
-SIGNAL	tx_ctr_do :  STD_LOGIC_VECTOR(35 DOWNTO 0);
-SIGNAL	SYNTHESIZED_WIRE_3 :  STD_LOGIC;
-SIGNAL	SYNTHESIZED_WIRE_2 :  STD_LOGIC_VECTOR(0 TO 1);
+SIGNAL	ifft_data_valid_t:  STD_LOGIC;
+SIGNAL	ifft_dout_imag_t :  STD_LOGIC_VECTOR(11 DOWNTO 0);
+SIGNAL	ifft_dout_real_t :  STD_LOGIC_VECTOR(11 DOWNTO 0);
+SIGNAL	ifft_eop_t :  STD_LOGIC;
+SIGNAL	ifft_sop_t :  STD_LOGIC;
+SIGNAL	ifft_source_ready_t :  STD_LOGIC;
+SIGNAL	ifft_source_real_t:  STD_LOGIC_VECTOR(11 DOWNTO 0);
+SIGNAL	ifft_source_sop_t:  STD_LOGIC;
+SIGNAL	ifft_source_eop_t :  STD_LOGIC;
+SIGNAL	pre_win_data_t:  STD_LOGIC_VECTOR(11 DOWNTO 0);
+SIGNAL	pre_win_data_valid_t:  STD_LOGIC;
+SIGNAL	ram_data_valid_t:  STD_LOGIC;
+SIGNAL	ram_rd_data_t:  STD_LOGIC_VECTOR(15 DOWNTO 0);
+SIGNAL	rom_rd_adr_t:  STD_LOGIC_VECTOR(7 DOWNTO 0);
+SIGNAL	rom_rd_en_t:  STD_LOGIC;
+SIGNAL	send_data_valid_t:  STD_LOGIC;
+SIGNAL	tx_ctr_do_t :  STD_LOGIC_VECTOR(35 DOWNTO 0);
+SIGNAL	 ifft_sink_ready_t: std_logic;
 
 
 BEGIN 
-SYNTHESIZED_WIRE_3 <= '1';
-SYNTHESIZED_WIRE_2 <= "00";
-
-
-
+ifft_data_valid <=ifft_data_valid_t;
+ifft_dout_imag  <=ifft_dout_imag_t;
+ifft_dout_real  <=ifft_dout_real_t;
+ifft_eop <=ifft_eop_t;
+ifft_sop <=ifft_sop_t;
+ifft_source_eop <=ifft_source_eop_t;
+ifft_source_sop <=ifft_source_sop_t;
+--ifft_source_ready <= ifft_source_ready_t;
+ifft_source_real <=ifft_source_real_t;
+pre_win_data <=pre_win_data_t;
+pre_win_data_valid <=pre_win_data_valid_t;
+ram_data_valid_t<=ram_data_valid_t;
+ram_rd_data <=ram_rd_data_t;
+rom_rd_adr <=rom_rd_adr_t;
+rom_rd_en <=rom_rd_en_t;
+send_data_valid <=send_data_valid_t;
+--tx_ctr_do <=tx_ctr_do_t;
+ ifft_sink_ready <= ifft_sink_ready_t;
 b2v_inst : rom_ip
-PORT MAP(rden => rom_rd_en_ALTERA_SYNTHESIZED,
+PORT MAP(rden => rom_rd_en_t,
 		 clock => clk,
-		 address => rom_rd_adr_ALTERA_SYNTHESIZED,
-		 q => pre_win_data_ALTERA_SYNTHESIZED);
+		 address => rom_rd_adr_t,
+		 q => pre_win_data_t);
 
 
 b2v_inst1 : fft_ip
 PORT MAP(clk => clk,
 		 reset_n => rst_n,
-		 clk_ena => SYNTHESIZED_WIRE_3,
-		 inverse => SYNTHESIZED_WIRE_3,
-		 sink_valid => ifft_data_valid_ALTERA_SYNTHESIZED,
-		 sink_sop => ifft_sop_ALTERA_SYNTHESIZED,
-		 sink_eop => ifft_eop_ALTERA_SYNTHESIZED,
-		 source_ready => ifft_source_ready,
-		 sink_error => SYNTHESIZED_WIRE_2,
-		 sink_imag => ifft_dout_imag_ALTERA_SYNTHESIZED,
-		 sink_real => ifft_dout_real_ALTERA_SYNTHESIZED,
-		 sink_ready => ifft_sink_ready,
-		 source_sop => ifft_source_sop_ALTERA_SYNTHESIZED,
-		 source_eop => iift_source_eop,
-		 source_valid => ifft_source_ready,
+		 clk_ena => '1',
+		 inverse => '0',
+		 sink_valid => ifft_data_valid_t,
+		 --sink_valid => '1',
+		 sink_sop => ifft_sop_t,
+		 sink_eop => ifft_eop_t,
+		 source_ready => ifft_source_ready_t,
+		 --source_ready => '1',
+		 sink_error => "00",
+		 sink_imag => ifft_dout_imag_t,
+		 sink_real => ifft_dout_real_t,
+		 sink_ready => ifft_sink_ready_t,
+		 source_sop => ifft_source_sop_t,
+		 source_eop => ifft_source_eop_t,
+		 source_valid => ifft_source_ready_t,
 		 source_error => ifft_source_error,
 		 source_exp => ifft_source_exp,
 		 source_imag => ifft_source_imag,
-		 source_real => ifft_source_real_ALTERA_SYNTHESIZED);
+		 source_real => ifft_source_real_t);
 
 
 
@@ -232,25 +246,26 @@ GENERIC MAP(N => 33
 			)
 PORT MAP(rst_n => rst_n,
 		 clk => clk,
-		 source_data_valid => send_data_valid_ALTERA_SYNTHESIZED,
-		 din => tx_ctr_do,
-		 sink_data_valid => ifft_data_valid_ALTERA_SYNTHESIZED,
-		 sop => ifft_sop_ALTERA_SYNTHESIZED,
-		 eop => ifft_eop_ALTERA_SYNTHESIZED,
-		 dout_imag => ifft_dout_imag_ALTERA_SYNTHESIZED,
-		 dout_real => ifft_dout_real_ALTERA_SYNTHESIZED);
+		 source_data_valid => send_data_valid_t,
+		 din => tx_ctr_do_t,
+		 sink_data_valid => ifft_data_valid_t,
+		 ifft_sink_ready =>ifft_sink_ready_t,
+		 sop => ifft_sop_t,
+		 eop => ifft_eop_t,
+		 dout_imag => ifft_dout_imag_t,
+		 dout_real => ifft_dout_real_t);
 
 
 b2v_inst3 : cp_insert
 PORT MAP(rst_n => rst_n,
 		 clk => clk,
-		 eop => ifft_source_eop_ALTERA_SYNTHESIZED,
-		 sop => ifft_source_sop_ALTERA_SYNTHESIZED,
-		 din => ifft_source_real_ALTERA_SYNTHESIZED,
+		 eop => ifft_source_eop_t,
+		 sop => ifft_source_sop_t,
+		 din => ifft_source_real_t,
 		 rd_en => ram_rd_en,
 		 rd_sel => rd_sel,
 		 rd_data_sel => rd_data_sel,
-		 ram_data_oe => ram_data_valid_ALTERA_SYNTHESIZED,
+		 ram_data_oe => ram_data_valid_t,
 		 rd_continue_o => rd_continue_o,
 		 flag_o1 => flag_o1,
 		 flag_eop => flag_eop,
@@ -261,17 +276,17 @@ PORT MAP(rst_n => rst_n,
 		 ram2_d => ram2_d,
 		 rd_adr => ram_rd_adr,
 		 rd_cnt_o => rd_cnt_o,
-		 rt => ram_rd_data_ALTERA_SYNTHESIZED,
+		 rt => ram_rd_data_t,
 		 wr_adr => ram_wr_adr);
 
 
 b2v_inst4 : tx_data
 PORT MAP(rst_n => rst_n,
 		 clk => clk,
-		 valid1 => pre_win_data_valid_ALTERA_SYNTHESIZED,
-		 valid2 => ram_data_valid_ALTERA_SYNTHESIZED,
-		 d1 => pre_win_data_ALTERA_SYNTHESIZED,
-		 d2 => ram_rd_data_ALTERA_SYNTHESIZED,
+		 valid1 => pre_win_data_valid_t,
+		 valid2 => ram_data_valid_t,
+		 d1 => pre_win_data_t,
+		 d2 => ram_rd_data_t,
 		 data_valid => tx_data_valid,
 		 do => tx_data_o);
 
@@ -280,32 +295,15 @@ b2v_inst5 : tx_ctr
 PORT MAP(rst_n => rst_n,
 		 clk => clk,
 		 en => en,
-		 ifft_eop => ifft_eop_ALTERA_SYNTHESIZED,
+		 ifft_eop => ifft_eop_t,
 		 din => din,
-		 rd_en => rom_rd_en_ALTERA_SYNTHESIZED,
-		 send_data_valid => send_data_valid_ALTERA_SYNTHESIZED,
-		 ram_data_valid => pre_win_data_valid_ALTERA_SYNTHESIZED,
+		 rd_en => rom_rd_en_t,
+		 send_data_valid => send_data_valid_t,
+		 ram_data_valid => pre_win_data_valid_t,
 		 flag_o => flag_o,
-		 adr => rom_rd_adr_ALTERA_SYNTHESIZED,
+		 adr => rom_rd_adr_t,
 		 cnt_o => cnt,
-		 dout => tx_ctr_do);
+		 dout => tx_ctr_do_t);
 
-
-ifft_source_eop_ALTERA_SYNTHESIZED <= iift_source_eop;
-ifft_data_valid <= ifft_data_valid_ALTERA_SYNTHESIZED;
-ifft_sop <= ifft_sop_ALTERA_SYNTHESIZED;
-ifft_eop <= ifft_eop_ALTERA_SYNTHESIZED;
-ifft_source_sop <= ifft_source_sop_ALTERA_SYNTHESIZED;
-ifft_source_eop <= ifft_source_eop_ALTERA_SYNTHESIZED;
-rom_rd_en <= rom_rd_en_ALTERA_SYNTHESIZED;
-send_data_valid <= send_data_valid_ALTERA_SYNTHESIZED;
-pre_win_data_valid <= pre_win_data_valid_ALTERA_SYNTHESIZED;
-ram_data_valid <= ram_data_valid_ALTERA_SYNTHESIZED;
-ifft_dout_imag <= ifft_dout_imag_ALTERA_SYNTHESIZED;
-ifft_dout_real <= ifft_dout_real_ALTERA_SYNTHESIZED;
-ifft_source_real <= ifft_source_real_ALTERA_SYNTHESIZED;
-pre_win_data <= pre_win_data_ALTERA_SYNTHESIZED;
-ram_rd_data <= ram_rd_data_ALTERA_SYNTHESIZED;
-rom_rd_adr <= rom_rd_adr_ALTERA_SYNTHESIZED;
 
 END bdf_type;
