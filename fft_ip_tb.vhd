@@ -23,8 +23,14 @@
 
 library ieee;
 use ieee.std_logic_1164.all;
+-- use ieee.std_logic_unsigned.all;
+-- use ieee.std_logic_arith.all;
+-- use ieee.std_logic_signed.all;
+
 use ieee.numeric_std.all;
 use std.textio.all;
+-- USE STD.TEXTIO.ALL;
+-- USE IEEE.STD_LOGIC_TEXTIO.ALL; 
 entity fft_ip_tb is
 end fft_ip_tb;
 
@@ -97,7 +103,24 @@ architecture tb of fft_ip_tb is
       ); 
   end component fft_ip;
   
+  FILE tb_fft_real:TEXT OPEN WRITE_MODE IS "tb_fft_real.txt";
+  FILE tb_fft_imag:TEXT OPEN WRITE_MODE IS "tb_fft_imag.txt";
+  
 begin
+
+process(clk) is
+ 	VARIABLE lo_1,lo_2:LINE;
+    BEGIN
+	if rising_edge(clk) then
+		if sink_valid='1' then
+		    WRITE (lo_1,to_integer(signed(sink_real)));
+			 WRITELINE (tb_fft_real,lo_1);
+			WRITE (lo_2,to_integer(signed(sink_imag)));
+			 WRITELINE (tb_fft_imag,lo_2); 
+			 
+		end if;
+	end if;
+end process;	
   -----------------------------------------------------------------------------------------------
   -- Reset Generation                                                                          
   -----------------------------------------------------------------------------------------------
