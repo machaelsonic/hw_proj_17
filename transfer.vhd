@@ -190,6 +190,14 @@ SIGNAL	tx_ctr_do_t :  STD_LOGIC_VECTOR(35 DOWNTO 0);
 SIGNAL	 ifft_sink_ready_t: std_logic;
 
 
+
+signal cnt_t: integer range 0 to 255;
+signal ifft_sop_t_gold,ifft_eop_t_gold,ifft_sink_ready_t_gold:  STD_LOGIC; 
+
+
+
+
+
 BEGIN 
 ifft_data_valid <=ifft_data_valid_t;
 ifft_dout_imag  <=ifft_dout_imag_t;
@@ -305,5 +313,67 @@ PORT MAP(rst_n => rst_n,
 		 cnt_o => cnt,
 		 dout => tx_ctr_do_t);
 
+fft_ip_gold : fft_ip
+PORT MAP(clk => clk,
+		 reset_n => rst_n,
+		 clk_ena => '1',
+		 inverse => '0',
+		 --sink_valid => ifft_data_valid_t_gold,
+		 sink_valid => ifft_sink_ready_t_gold,
+		 sink_sop => ifft_sop_t_gold,
+		 sink_eop => ifft_eop_t_gold,
+		 --source_ready => ifft_source_ready_t_gold,
+		 source_ready => '1',
+		 sink_error => "00",
+		 sink_imag => ifft_dout_imag_t,
+		 sink_ready => ifft_sink_ready_t_gold,
+		 sink_real => ifft_dout_real_t);
+		 
+		 -- source_sop => ifft_source_sop_t_gold,
+		 -- source_eop => ifft_source_eop_t_gold,
+		 -- source_valid => ifft_source_ready_t_gold,
+		 -- source_error => ifft_source_error_gold,
+		 -- source_exp => ifft_source_exp_gold,
+		 -- source_imag => ifft_source_imag_gold,
+		 -- source_real => ifft_source_real_t_gold);
+		 
+		 
+		 process(rst_n,clk) is
+    begin
+      if rst_n='0' then
+         cnt_t<=0; 
+         -- ifft_sop_t_gold<='1'; 
+         -- ifft_eop_t_gold<='0';        
+      elsif clk'event and clk='1' then   
+         if ifft_sink_ready_t_gold ='1' then
+           if cnt_t=255 then
+              cnt_t<=0;
+           else
+              cnt_t<=cnt_t+1;
+           end if;
+		 -- else 
+		    -- cnt_t<=0;
+		 end if;
+	    -- case cnt_t is
+           -- when 255 =>
+            -- ifft_sop_t_gold<='0'; 
+            -- ifft_eop_t_gold<='1';  
+           -- when 0 =>
+            -- ifft_sop_t_gold<='1'; 
+            -- ifft_eop_t_gold<='0';  
+           -- when others =>
+            -- ifft_sop_t_gold<='0'; 
+            -- ifft_eop_t_gold<='0';  
+         -- end case;
 
+      end if;
+
+
+  end process;
+  
+            ifft_sop_t_gold<='1' when cnt_t= 0 else 
+			                 '0';
+            ifft_eop_t_gold<='1' when cnt_t= 255  else
+			                 '0' ; 
+ 
 END bdf_type;
