@@ -18,23 +18,22 @@ end entity ifft_data_gen ;
 architecture rtl of ifft_data_gen is
  signal cnt,cnt1: integer range 0 to 255;
  begin
- sink_data_valid<='1';
+ --sink_data_valid<='1';
   process(rst_n,clk) is
     begin
       if rst_n='0' then
          cnt<=0; 
-         sop<='1'; 
+         sop<='0'; 
          eop<='0';        
          --sink_data_valid<='0';
       elsif clk'event and clk='1' then
-        -- sink_data_valid<=source_data_valid;
+        sink_data_valid<=source_data_valid;
          if source_data_valid='1' then
            if cnt=255 then
               cnt<=0;
            else
               cnt<=cnt+1;
            end if;
-         end if; 
 		 case cnt is
            when 255 =>
             sop<='0'; 
@@ -46,6 +45,11 @@ architecture rtl of ifft_data_gen is
             sop<='0'; 
             eop<='0';
          end case;
+		else 
+		 cnt<=0;
+		 sop<='0'; 
+         eop<='0'; 
+		 end if;
       end if;
 	  
   end process;
