@@ -71,6 +71,7 @@ architecture tb of fft_ip_tb is
   signal frames_out_index : natural range 0 to NUM_FRAMES_c := 0;
 
   signal cnt        : natural range 0 to 256;
+  signal cnt_t        : natural range 0 to 256;
   signal end_test   : std_logic;
   -- signal the end of the input data stream and output data stream.
   signal end_input  : std_logic;
@@ -177,12 +178,23 @@ end process;
     if reset_n = '0' then
       cnt <= 0;
     elsif rising_edge(clk) then
-      if sink_valid = '1' and sink_ready = '1' then
+      --if sink_valid = '1' and sink_ready = '1' then
+      if sink_ready = '1' then
         if cnt = fftpts_array(frames_in_index) - 1 then
           cnt <= 0;
         else
           cnt <= cnt + 1;
         end if;
+		
+		if cnt = 253 then
+			cnt_t <= 0;
+		elsif cnt = 254 then
+			cnt_t <= 1;
+		elsif cnt = 255 then
+			cnt_t <= 2;
+		else
+			cnt_t <= cnt + 3;
+		end if;
       end if;
     end if;
   end process cnt_p;
@@ -245,6 +257,14 @@ end process;
   end process end_test_p;
 
   -----------------------------------------------------------------------------------------------
+  -- Temp cnt 
+  -----------------------------------------------------------------------------------------------
+  -- process (cnt)
+  -- begin
+	-- cnt_t <= cnt - 1;
+  -- end process;
+  
+  -----------------------------------------------------------------------------------------------
   -- Read input data from files                                                                  
   -----------------------------------------------------------------------------------------------
   testbench_i : process(clk) is
@@ -270,8 +290,10 @@ end process;
           readline(i_file, idata);
           read(idata, data_i);
           sink_valid <= '1';
-          sink_real  <= std_logic_vector(to_signed(data_r, 12));
-          sink_imag  <= std_logic_vector(to_signed(data_i, 12));
+          --sink_real  <= std_logic_vector(to_signed(data_r, 12));
+          --sink_imag  <= std_logic_vector(to_signed(data_i, 12));
+		  sink_real  <= std_logic_vector(to_signed(cnt_t, 12));
+		  sink_imag  <= std_logic_vector(to_signed(0, 12));
         else
           sink_valid <= '1';
           sink_real  <= sink_real;

@@ -38,7 +38,7 @@ architecture rtl of ifft_ram_rd_ctr is
         end if;
     end process;
     
-    process(state) is
+    process(state,rst_n,eop_t,rd_cnt) is
       begin
          case state is
             when s_rst =>
@@ -91,7 +91,7 @@ architecture rtl of ifft_ram_rd_ctr is
               rd_en_t<='0';
               rd_adr_cnt_en<='0';
 				  rd_continue<='0';
-				when s_rd =>
+			when s_rd =>
               rd_en_t<='1';
               rd_adr_cnt_en<='1';
 				  rd_continue<='0';  
@@ -99,7 +99,7 @@ architecture rtl of ifft_ram_rd_ctr is
               rd_en_t<='1';
               rd_adr_cnt_en<='1';
 				  rd_continue<='1';
-				when s_rd2 =>
+			when s_rd2 =>
               rd_en_t<='1';
               rd_adr_cnt_en<='1';
 				  rd_continue<='0';
@@ -194,12 +194,15 @@ process(rst_n,clk) is
       begin
         if rst_n='0' then
             oe_t1<='0';
+			oe_t<='0';
         elsif clk'event and clk='1' then
             oe_t<=rd_en_t1;  
             oe_t1<=oe_t;  
         end if;
     end process; 
+	
     oe<=oe_t1 or oe_t;
+	--oe<='0';
 	 
 process(clk) is
        begin

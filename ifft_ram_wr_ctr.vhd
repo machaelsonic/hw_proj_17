@@ -31,7 +31,7 @@ architecture rtl of ifft_ram_wr_ctr is
         end if;
     end process;
     
-    process(state) is
+    process(state,rst_n,sop,wr_cnt) is
       begin
          case state is
             when s_rst =>

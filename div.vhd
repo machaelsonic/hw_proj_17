@@ -36,6 +36,7 @@ begin
 		  flag<='0';
 		  tmp4:=(others=>'0');
 		  tmp5:=0;
+		  pre_cnt<='0';
 	  elsif clk'event and clk='1' then
 		 if (din2>59000 and flag='0')  then 
 		   if p_cnt=255 then

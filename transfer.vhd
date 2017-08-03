@@ -18,7 +18,7 @@
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.all; 
-
+USE ieee.std_logic_arith.all; 
 LIBRARY work;
 
 ENTITY transfer IS 
@@ -193,7 +193,7 @@ SIGNAL	 ifft_sink_ready_t: std_logic;
 
 signal cnt_t: integer range 0 to 255;
 signal ifft_sop_t_gold,ifft_eop_t_gold,ifft_sink_ready_t_gold:  STD_LOGIC; 
-
+signal a: std_logic_vector(11 downto 0);
 
 
 
@@ -210,7 +210,7 @@ ifft_source_sop <=ifft_source_sop_t;
 ifft_source_real <=ifft_source_real_t;
 pre_win_data <=pre_win_data_t;
 pre_win_data_valid <=pre_win_data_valid_t;
-ram_data_valid_t<=ram_data_valid_t;
+ram_data_valid<=ram_data_valid_t;
 ram_rd_data <=ram_rd_data_t;
 rom_rd_adr <=rom_rd_adr_t;
 rom_rd_en <=rom_rd_en_t;
@@ -325,9 +325,13 @@ PORT MAP(clk => clk,
 		 --source_ready => ifft_source_ready_t_gold,
 		 source_ready => '1',
 		 sink_error => "00",
-		 sink_imag => ifft_dout_imag_t,
+		 --sink_imag => ifft_dout_imag_t,
+		 sink_imag => (others=>'0'),
+		 
+		 
 		 sink_ready => ifft_sink_ready_t_gold,
-		 sink_real => ifft_dout_real_t);
+		  sink_real =>a);
+		 --sink_real => ifft_dout_real_t
 		 
 		 -- source_sop => ifft_source_sop_t_gold,
 		 -- source_eop => ifft_source_eop_t_gold,
@@ -370,6 +374,8 @@ PORT MAP(clk => clk,
 
 
   end process;
-
+-- ifft_dout_imag_t<=(others=>'0');
+-- ifft_dout_real_t<=conv_std_logic_vector(cnt_t,12);
+a<=conv_std_logic_vector(cnt_t,12);
  
 END bdf_type;

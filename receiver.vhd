@@ -135,15 +135,14 @@ COMPONENT fft_ip
 	);
 END COMPONENT;
 
-COMPONENT fifo_ip
-	PORT(wrreq : IN STD_LOGIC;
-		 rdreq : IN STD_LOGIC;
-		 clock : IN STD_LOGIC;
-		 aclr : IN STD_LOGIC;
-		 data : IN STD_LOGIC_VECTOR(11 DOWNTO 0);
-		 q : OUT STD_LOGIC_VECTOR(11 DOWNTO 0)
-	);
-END COMPONENT;
+COMPONENT fifo_256
+ generic(N: integer );
+    port( rst_n: in std_logic;
+         clk: in std_logic;
+		 en:in std_logic;
+		 din:in std_logic_vector(11 downto 0);
+		 dout: out std_logic_vector(11 downto 0));
+END COMPONENT fifo_256;
 
 COMPONENT data_out
 	PORT(rst_n : IN STD_LOGIC;
@@ -298,49 +297,89 @@ PORT MAP(clk => clk,
 	  fft_source_imag_delay<=fft_source_imag_delay_t;
 	  
 	  
-b2v_inst32 : fifo_ip
-PORT MAP(wrreq => '1',
-		 rdreq => '1',
-		 clock => clk,
-		 aclr => rst,
-		 data => rcv_data_t,
-		 q => rcv_data_delay_t);
+b2v_inst32 : fifo_256
+   generic MAP (N=>256) 
+    port MAP (rst_n => rst_n,
+              clk =>clk,
+			   en =>'1',
+		       din => rcv_data_t,
+               dout =>rcv_data_delay_t);
+			
+			
+ -- PORT MAP(wrreq => '1',
+		 -- rdreq => '1',
+		 -- clock => clk,
+		 -- aclr => rst,
+		 -- data => rcv_data_t,
+		 -- q => rcv_data_delay_t);
+
+b2v_inst33 : fifo_256
+  generic MAP (N=>256) 
+    port MAP (rst_n =>rst_n,
+            clk =>clk,
+			en => fft_source_valid_t,
+		    din => fft_source_real_t,
+            dout =>fft_source_real_delay_1_t);
+
+-- PORT MAP(wrreq => fft_source_valid_t,
+		 -- rdreq => fft_source_valid_t,
+		 -- clock => clk,
+		 -- aclr => rst,
+		 -- data => fft_source_real_t,
+		 -- q => fft_source_real_delay_1_t);
 
 
-b2v_inst33 : fifo_ip
-PORT MAP(wrreq => fft_source_valid_t,
-		 rdreq => fft_source_valid_t,
-		 clock => clk,
-		 aclr => rst,
-		 data => fft_source_real_t,
-		 q => fft_source_real_delay_1_t);
+b2v_inst34 : fifo_256
+  generic MAP (N=>256) 
+     port MAP (rst_n =>rst_n,
+            clk =>clk,
+			en => fft_source_valid_t,
+		    din => fft_source_imag_t,
+            dout =>fft_source_imag_delay_1_t);
 
 
-b2v_inst34 : fifo_ip
-PORT MAP(wrreq => fft_source_valid_t,
-		 rdreq => fft_source_valid_t,
-		 clock => clk,
-		 aclr => rst,
-		 data => fft_source_imag_t,
-		 q => fft_source_imag_delay_1_t);
+
+-- PORT MAP(wrreq => fft_source_valid_t,
+		 -- rdreq => fft_source_valid_t,
+		 -- clock => clk,
+		 -- aclr => rst,
+		 -- data => fft_source_imag_t,
+		 -- q => fft_source_imag_delay_1_t);
 
 
-b2v_inst35 : fifo_ip
-PORT MAP(wrreq => fft_source_valid_t,
-		 rdreq => fft_source_valid_t,
-		 clock => clk,
-		 aclr => rst,
-		 data => fft_source_real_delay_1_t,
-		 q => fft_source_real_delay_t);
+b2v_inst35 : fifo_256
+ generic MAP (N=>256) 
+   port MAP (rst_n =>rst_n,
+            clk =>clk,
+			en => fft_source_valid_t,
+		    din => fft_source_real_delay_1_t,
+            dout =>fft_source_real_delay_t);
+			
+			
+-- PORT MAP(wrreq => fft_source_valid_t,
+		 -- rdreq => fft_source_valid_t,
+		 -- clock => clk,
+		 -- aclr => rst,
+		 -- data => fft_source_real_delay_1_t,
+		 -- q => fft_source_real_delay_t);
 
 
-b2v_inst36 : fifo_ip
-PORT MAP(wrreq => fft_source_valid_t,
-		 rdreq => fft_source_valid_t,
-		 clock => clk,
-		 aclr => rst,
-		 data => fft_source_imag_delay_1_t,
-		 q => fft_source_imag_delay_t);
+b2v_inst36 : fifo_256
+  generic MAP (N=>256) 
+    port MAP (rst_n =>rst_n,
+            clk =>clk,
+			en => fft_source_valid_t,
+		    din => fft_source_imag_delay_1_t,
+            dout =>fft_source_imag_delay_t);
+
+
+
+-- PORT MAP(wrreq => fft_source_valid_t,
+		 -- rdreq => fft_source_valid_t,
+		 -- clock => clk,
+		 -- aclr => rst,
+		 -- data => fft_source_imag_delay_1_t,
+		 -- q => fft_source_imag_delay_t);
 
 		 
 		 
@@ -361,13 +400,21 @@ PORT MAP(rst_n => rst_n,
 demap_sink_eop<=demap_sink_eop_t;
 
 
-b2v_inst8 : fifo_ip_8
-PORT MAP(wrreq => '1',
-		 rdreq => '1',
-		 clock => clk,
-		 aclr => rst,
-		 data => data_in,
-		 q => rcv_data_t);
+b2v_inst8 : fifo_256
+  generic MAP (N=>8) 
+  port MAP (rst_n =>rst_n,
+            clk =>clk,
+			en => '1',
+		    din => data_in,
+            dout =>rcv_data_t);
+ 
+  
+ -- PORT MAP(wrreq => '1',
+		 -- rdreq => '1',
+		 -- clock => clk,
+		 -- aclr => rst,
+		 -- data => data_in,
+		 -- q => rcv_data_t);
 		 
 		 rcv_data<=rcv_data_t;
 

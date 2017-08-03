@@ -26,7 +26,12 @@
 
 LIBRARY ieee;                                               
 USE ieee.std_logic_1164.all; 
-USE ieee.std_logic_unsigned.all;                               
+USE ieee.std_logic_unsigned.all; 
+--USE ieee.std_logic_arith.all;                              
+use ieee.numeric_std.all;
+use std.textio.all;
+
+
 
 ENTITY plc_design_vhd_tst IS
 END plc_design_vhd_tst;
@@ -182,7 +187,12 @@ END COMPONENT;
 signal cnt_1:integer range 0 to 2299;
 signal tmp:std_logic_vector(35 downto 0);
 signal d_t:std_logic;
+signal ifft_sop_t: integer;
 
+FILE tb_ifft_data:TEXT OPEN WRITE_MODE IS "tb_ifft_data.txt";
+FILE tb_fft_data_out:TEXT OPEN WRITE_MODE IS "tb_fft_data_out.txt";
+FILE tb_fft_data_in:TEXT OPEN WRITE_MODE IS "tb_fft_data_in.txt";
+  
 BEGIN
 	i1 : plc_design
 	PORT MAP (
@@ -303,6 +313,61 @@ END PROCESS always;
 			 
 		end process;
 		en<=d_t;
-		--dout<="101001011010010110100101101001011010";
-       datain<=tmp;                                                                        
+		datain<="101001011010010110100101101001011010";
+       --datain<=tmp; 
+    --ifft_sop_t<=to_integer(ifft_sop);
+       
+process(clk_tx) is
+ 	VARIABLE lo_1:LINE;
+    BEGIN
+	     if rising_edge(clk_tx) then
+		     if send_data_valid='1' then
+   	        WRITE (lo_1,to_bit(ifft_sop),left ,1);
+   	        WRITE (lo_1,to_bit(ifft_eop),left ,10);
+		        WRITE (lo_1,to_integer(signed(ifft_dout_real)),left,20);
+		        WRITE (lo_1,to_integer(signed(ifft_dout_imag)),left,40);
+		        
+			      WRITELINE (tb_ifft_data,lo_1);
+			      
+			 
+		end if;
+	end if;
+end process;
+
+  
+
+    process(clk_tx) is
+ 	VARIABLE lo_1:LINE;
+    BEGIN
+	     if rising_edge(clk_tx) then
+		     if fft_source_valid='1' then
+   	        WRITE (lo_1,to_bit(fft_source_sop),left ,1);
+   	        WRITE (lo_1,to_bit(fft_source_eop),left ,10);
+		        WRITE (lo_1,to_integer(signed(fft_source_real)),left,20);
+		        WRITE (lo_1,to_integer(signed(fft_source_imag)),left,40);
+		        
+			      WRITELINE (tb_fft_data_out,lo_1);
+			       
+			 
+		end if;
+	end if;
+end process; 
+
+ process(clk_tx) is
+ 	VARIABLE lo_1:LINE;
+    BEGIN
+	     if rising_edge(clk_tx) then
+		     if fft_data_valid='1' then
+   	        WRITE (lo_1,to_bit(fft_sop),left ,1);
+   	        WRITE (lo_1,to_bit(fft_eop),left ,10);
+		        WRITE (lo_1,to_integer(signed(rcv_data_delay)),left,20);
+		        ---WRITE (lo_1,to_integer(signed(fft_source_imag)),left,40);
+		        
+			      WRITELINE (tb_fft_data_in,lo_1);
+			       
+			 
+		end if;
+	end if;
+end process;
+                                                                     
 END plc_design_arch;
