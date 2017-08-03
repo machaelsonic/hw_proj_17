@@ -189,7 +189,8 @@ signal tmp:std_logic_vector(35 downto 0);
 signal d_t:std_logic;
 signal ifft_sop_t: integer;
 
-FILE tb_ifft_data:TEXT OPEN WRITE_MODE IS "tb_ifft_data.txt";
+FILE tb_ifft_data_in:TEXT OPEN WRITE_MODE IS "tb_ifft_data_in.txt";
+FILE tb_ifft_data_out:TEXT OPEN WRITE_MODE IS "tb_ifft_data_out.txt";
 FILE tb_fft_data_out:TEXT OPEN WRITE_MODE IS "tb_fft_data_out.txt";
 FILE tb_fft_data_in:TEXT OPEN WRITE_MODE IS "tb_fft_data_in.txt";
   
@@ -316,23 +317,45 @@ END PROCESS always;
 		datain<="101001011010010110100101101001011010";
        --datain<=tmp; 
     --ifft_sop_t<=to_integer(ifft_sop);
-       
+
+-------------------------------------------------------------------------------
+-- XMT IFFT IN&OUT
+-------------------------------------------------------------------------------
 process(clk_tx) is
  	VARIABLE lo_1:LINE;
     BEGIN
 	     if rising_edge(clk_tx) then
-				if send_data_valid='1' then
-					WRITE (lo_1,to_bit(ifft_sop),left ,10);
-					WRITE (lo_1,to_bit(ifft_eop),left ,10);
+				if ifft_data_valid='1' then
+					-- WRITE (lo_1,to_bit(ifft_sop),left ,10);
+					-- WRITE (lo_1,to_bit(ifft_eop),left ,10);
 					WRITE (lo_1,to_integer(signed(ifft_dout_real)),left,10);
 					WRITE (lo_1,to_integer(signed(ifft_dout_imag)),left,10);
-					WRITELINE (tb_ifft_data,lo_1);
+					WRITELINE (tb_ifft_data_in,lo_1);
 				end if;
 		end if;
 	end 
 process;
 
 
+process(clk_tx) is
+ 	VARIABLE lo_1:LINE;
+	alias ifft_source_valid is <<signal i1.b2v_inst1.ifft_source_ready_t  : STD_LOGIC>>;
+    BEGIN
+	     if rising_edge(clk_tx) then
+				if ifft_source_valid='1' then
+					-- WRITE (lo_1,to_bit(ifft_source_sop),left ,10);
+					-- WRITE (lo_1,to_bit(ifft_source_eop),left ,10);
+					WRITE (lo_1,to_integer(signed(ifft_source_real)),left,10);
+					WRITE (lo_1,to_integer(signed(ifft_source_imag)),left,10);
+					WRITELINE (tb_ifft_data_out,lo_1);
+				end if;
+		end if;
+	end 
+process;
+
+-------------------------------------------------------------------------------
+-- RCV FFT IN&OUT
+-------------------------------------------------------------------------------
 process(clk_tx) is
  	VARIABLE lo_1:LINE;
     BEGIN
