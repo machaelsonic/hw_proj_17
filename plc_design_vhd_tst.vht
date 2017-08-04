@@ -110,78 +110,80 @@ SIGNAL wr_sel : STD_LOGIC;
 SIGNAL x_cor1 : STD_LOGIC_VECTOR(20 DOWNTO 0);
 SIGNAL x_cor2 : STD_LOGIC_VECTOR(20 DOWNTO 0);
 COMPONENT plc_design
-	PORT (
-	a_r : OUT STD_LOGIC_VECTOR(11 DOWNTO 0);
-	clk_tx : IN STD_LOGIC;
-	cnt : OUT STD_LOGIC_VECTOR(9 DOWNTO 0);
-	cnt_o : OUT STD_LOGIC_VECTOR(8 DOWNTO 0);
-	datain : IN STD_LOGIC_VECTOR(35 DOWNTO 0);
-	demap_dout : OUT STD_LOGIC_VECTOR(35 DOWNTO 0);
-	demap_sink_eop : OUT STD_LOGIC;
-	demap_sink_sop : OUT STD_LOGIC;
-	demap_sink_valid : OUT STD_LOGIC;
-	en : IN STD_LOGIC;
-	fft_data_valid : OUT STD_LOGIC;
-	fft_eop : OUT STD_LOGIC;
-	fft_sink_ready : OUT STD_LOGIC;
-	fft_sop : OUT STD_LOGIC;
-	fft_source_eop : OUT STD_LOGIC;
-	fft_source_error : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
-	fft_source_exp : OUT STD_LOGIC_VECTOR(5 DOWNTO 0);
-	fft_source_imag : OUT STD_LOGIC_VECTOR(11 DOWNTO 0);
-	fft_source_imag_delay : OUT STD_LOGIC_VECTOR(11 DOWNTO 0);
-	fft_source_imag_delay_1 : OUT STD_LOGIC_VECTOR(11 DOWNTO 0);
-	fft_source_real : OUT STD_LOGIC_VECTOR(11 DOWNTO 0);
-	fft_source_real_delay : OUT STD_LOGIC_VECTOR(11 DOWNTO 0);
-	fft_source_real_delay_1 : OUT STD_LOGIC_VECTOR(11 DOWNTO 0);
-	fft_source_sop : OUT STD_LOGIC;
-	fft_source_valid : OUT STD_LOGIC;
-	flag_eop : OUT STD_LOGIC;
-	flag_o : OUT STD_LOGIC;
-	flag_o1 : OUT STD_LOGIC;
-	ifft_data : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
-	ifft_data_valid : OUT STD_LOGIC;
-	ifft_dout_imag : OUT STD_LOGIC_VECTOR(11 DOWNTO 0);
-	ifft_dout_real : OUT STD_LOGIC_VECTOR(11 DOWNTO 0);
-	ifft_eop : OUT STD_LOGIC;
-	ifft_sink_ready : OUT STD_LOGIC;
-	ifft_sop : OUT STD_LOGIC;
-	ifft_source_eop : OUT STD_LOGIC;
-	ifft_source_error : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
-	ifft_source_exp : OUT STD_LOGIC_VECTOR(5 DOWNTO 0);
-	ifft_source_imag : OUT STD_LOGIC_VECTOR(11 DOWNTO 0);
-	ifft_source_real : OUT STD_LOGIC_VECTOR(11 DOWNTO 0);
-	ifft_source_sop : OUT STD_LOGIC;
-	max_p : OUT STD_LOGIC_VECTOR(8 DOWNTO 0);
-	p_cnt_o : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
-	pre_cnt : OUT STD_LOGIC;
-	pre_win_data : OUT STD_LOGIC_VECTOR(11 DOWNTO 0);
-	pre_win_data_valid : OUT STD_LOGIC;
-	ram1_d : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
-	ram2_d : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
-	ram_data_valid : OUT STD_LOGIC;
-	ram_rd_adr : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
-	ram_rd_data : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
-	ram_rd_en : OUT STD_LOGIC;
-	ram_wr_adr : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
-	ram_wr_en : OUT STD_LOGIC;
-	rcv_data : OUT STD_LOGIC_VECTOR(11 DOWNTO 0);
-	rcv_data_delay : OUT STD_LOGIC_VECTOR(11 DOWNTO 0);
-	rd_cnt_o : OUT STD_LOGIC_VECTOR(8 DOWNTO 0);
-	rd_continue_o : OUT STD_LOGIC;
-	rd_data_sel : OUT STD_LOGIC;
-	rd_sel : OUT STD_LOGIC;
-	rom_rd_adr : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
-	rom_rd_en : OUT STD_LOGIC;
-	rst_n_tx : IN STD_LOGIC;
-	rt_r : OUT STD_LOGIC_VECTOR(24 DOWNTO 0);
-	send_data_valid : OUT STD_LOGIC;
-	syn_point : OUT STD_LOGIC_VECTOR(8 DOWNTO 0);
-	tx_data_o : OUT STD_LOGIC_VECTOR(11 DOWNTO 0);
-	tx_data_valid : OUT STD_LOGIC;
-	wr_sel : OUT STD_LOGIC;
-	x_cor1 : OUT STD_LOGIC_VECTOR(20 DOWNTO 0);
-	x_cor2 : OUT STD_LOGIC_VECTOR(20 DOWNTO 0)
+	PORT
+	(
+		clk_tx :  IN  STD_LOGIC;
+		rst_n_tx :  IN  STD_LOGIC;
+		en :  IN  STD_LOGIC;
+		datain :  IN  STD_LOGIC_VECTOR(35 DOWNTO 0);
+		receiver_din: IN  STD_LOGIC_VECTOR(11 DOWNTO 0);
+		ifft_sink_ready :  OUT  STD_LOGIC;
+		ifft_source_sop :  OUT  STD_LOGIC;
+		ifft_source_eop :  OUT  STD_LOGIC;
+		ifft_data_valid :  OUT  STD_LOGIC;
+		ifft_sop :  OUT  STD_LOGIC;
+		ifft_eop :  OUT  STD_LOGIC;
+		rom_rd_en :  OUT  STD_LOGIC;
+		send_data_valid :  OUT  STD_LOGIC;
+		pre_win_data_valid :  OUT  STD_LOGIC;
+		ram_rd_en :  OUT  STD_LOGIC;
+		ram_wr_en :  OUT  STD_LOGIC;
+		ram_data_valid :  OUT  STD_LOGIC;
+		tx_data_valid :  OUT  STD_LOGIC;
+		fft_sink_ready :  OUT  STD_LOGIC;
+		pre_cnt :  OUT  STD_LOGIC;
+		fft_source_sop :  OUT  STD_LOGIC;
+		fft_source_eop :  OUT  STD_LOGIC;
+		fft_source_valid :  OUT  STD_LOGIC;
+		fft_sop :  OUT  STD_LOGIC;
+		fft_eop :  OUT  STD_LOGIC;
+		fft_data_valid :  OUT  STD_LOGIC;
+		demap_sink_sop :  OUT  STD_LOGIC;
+		demap_sink_eop :  OUT  STD_LOGIC;
+		demap_sink_valid :  OUT  STD_LOGIC;
+		flag_o :  OUT  STD_LOGIC;
+		rd_sel :  OUT  STD_LOGIC;
+		rd_data_sel :  OUT  STD_LOGIC;
+		wr_sel :  OUT  STD_LOGIC;
+		rd_continue_o :  OUT  STD_LOGIC;
+		flag_o1 :  OUT  STD_LOGIC;
+		flag_eop :  OUT  STD_LOGIC;
+		a_r :  OUT  STD_LOGIC_VECTOR(11 DOWNTO 0);
+		cnt :  OUT  STD_LOGIC_VECTOR(9 DOWNTO 0);
+		cnt_o :  OUT  STD_LOGIC_VECTOR(8 DOWNTO 0);
+		demap_dout :  OUT  STD_LOGIC_VECTOR(35 DOWNTO 0);
+		fft_source_error :  OUT  STD_LOGIC_VECTOR(1 DOWNTO 0);
+		fft_source_exp :  OUT  STD_LOGIC_VECTOR(5 DOWNTO 0);
+		fft_source_imag :  OUT  STD_LOGIC_VECTOR(11 DOWNTO 0);
+		fft_source_imag_delay :  OUT  STD_LOGIC_VECTOR(11 DOWNTO 0);
+		fft_source_imag_delay_1 :  OUT  STD_LOGIC_VECTOR(11 DOWNTO 0);
+		fft_source_real :  OUT  STD_LOGIC_VECTOR(11 DOWNTO 0);
+		fft_source_real_delay :  OUT  STD_LOGIC_VECTOR(11 DOWNTO 0);
+		fft_source_real_delay_1 :  OUT  STD_LOGIC_VECTOR(11 DOWNTO 0);
+		ifft_data :  OUT  STD_LOGIC_VECTOR(15 DOWNTO 0);
+		ifft_dout_imag :  OUT  STD_LOGIC_VECTOR(11 DOWNTO 0);
+		ifft_dout_real :  OUT  STD_LOGIC_VECTOR(11 DOWNTO 0);
+		ifft_source_error :  OUT  STD_LOGIC_VECTOR(1 DOWNTO 0);
+		ifft_source_exp :  OUT  STD_LOGIC_VECTOR(5 DOWNTO 0);
+		ifft_source_imag :  OUT  STD_LOGIC_VECTOR(11 DOWNTO 0);
+		ifft_source_real :  OUT  STD_LOGIC_VECTOR(11 DOWNTO 0);
+		max_p :  OUT  STD_LOGIC_VECTOR(8 DOWNTO 0);
+		p_cnt_o :  OUT  STD_LOGIC_VECTOR(7 DOWNTO 0);
+		pre_win_data :  OUT  STD_LOGIC_VECTOR(11 DOWNTO 0);
+		ram1_d :  OUT  STD_LOGIC_VECTOR(15 DOWNTO 0);
+		ram2_d :  OUT  STD_LOGIC_VECTOR(15 DOWNTO 0);
+		ram_rd_adr :  OUT  STD_LOGIC_VECTOR(7 DOWNTO 0);
+		ram_rd_data :  OUT  STD_LOGIC_VECTOR(15 DOWNTO 0);
+		ram_wr_adr :  OUT  STD_LOGIC_VECTOR(7 DOWNTO 0);
+		rcv_data :  OUT  STD_LOGIC_VECTOR(11 DOWNTO 0);
+		rcv_data_delay :  OUT  STD_LOGIC_VECTOR(11 DOWNTO 0);
+		rd_cnt_o :  OUT  STD_LOGIC_VECTOR(8 DOWNTO 0);
+		rom_rd_adr :  OUT  STD_LOGIC_VECTOR(7 DOWNTO 0);
+		rt_r :  OUT  STD_LOGIC_VECTOR(24 DOWNTO 0);
+		syn_point :  OUT  STD_LOGIC_VECTOR(8 DOWNTO 0);
+		tx_data_o :  OUT  STD_LOGIC_VECTOR(11 DOWNTO 0);
+		x_cor1 :  OUT  STD_LOGIC_VECTOR(20 DOWNTO 0);
+		x_cor2 :  OUT  STD_LOGIC_VECTOR(20 DOWNTO 0)
 	);
 END COMPONENT;
 signal cnt_1:integer range 0 to 2299;
@@ -193,7 +195,15 @@ FILE tb_ifft_data_in:TEXT OPEN WRITE_MODE IS "tb_ifft_data_in.txt";
 FILE tb_ifft_data_out:TEXT OPEN WRITE_MODE IS "tb_ifft_data_out.txt";
 FILE tb_fft_data_out:TEXT OPEN WRITE_MODE IS "tb_fft_data_out.txt";
 FILE tb_fft_data_in:TEXT OPEN WRITE_MODE IS "tb_fft_data_in.txt";
-  
+
+FILE tb_tx_data:TEXT OPEN WRITE_MODE IS "tb_tx_data.txt";
+
+FILE tb_rx_data:TEXT OPEN READ_MODE IS "tb_rx_data_in.txt";
+
+
+signal  rx_data_from_file:  STD_LOGIC_VECTOR(11 DOWNTO 0);
+signal  rx_data_from_file_int_signal:  integer;
+
 BEGIN
 	i1 : plc_design
 	PORT MAP (
@@ -203,6 +213,8 @@ BEGIN
 	cnt => cnt,
 	cnt_o => cnt_o,
 	datain => datain,
+	--receiver_din =>tx_data_o,
+	receiver_din =>rx_data_from_file,
 	demap_dout => demap_dout,
 	demap_sink_eop => demap_sink_eop,
 	demap_sink_sop => demap_sink_sop,
@@ -338,9 +350,9 @@ process;
 
 
 process(clk_tx) is
- 	VARIABLE lo_1:LINE;
+	VARIABLE lo_1:LINE;
 	alias ifft_source_valid is <<signal i1.b2v_inst1.ifft_source_ready_t  : STD_LOGIC>>;
-    BEGIN
+   BEGIN
 	     if rising_edge(clk_tx) then
 				if ifft_source_valid='1' then
 					-- WRITE (lo_1,to_bit(ifft_source_sop),left ,10);
@@ -386,6 +398,30 @@ process(clk_tx) is
 		end if;
 	end process; 
 
-
+	
+process(clk_tx) is
+ 	VARIABLE lo_1:LINE;
+    BEGIN
+	     if rising_edge(clk_tx) then
+			if tx_data_valid='1' then
+		        WRITE (lo_1,to_integer(signed(tx_data_o)),left,10);		        
+			    WRITELINE (tb_tx_data,lo_1);
+			end if;
+		end if;
+	end process; 
+	
+process(clk_tx) is
+ 	VARIABLE lo_1:LINE;
+ 	variable rx_data_from_file_int: integer range -1024 to 1023;
+    BEGIN
+	     if rising_edge(clk_tx) then
+		     --READLINE (lo_1,tb_rx_data);
+			 READLINE (tb_rx_data,lo_1);
+			 READ (lo_1,rx_data_from_file_int);
+			end if;
+		rx_data_from_file_int_signal<=rx_data_from_file_int;	
+		rx_data_from_file<=std_logic_vector(to_signed(rx_data_from_file_int,12));	
+	end process;	
+	
                                                                      
 END plc_design_arch;
