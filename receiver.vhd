@@ -253,7 +253,8 @@ b2v_inst28 : mult_complex_ip
 PORT MAP(dataa_imag => a_i,
 		 dataa_real => a_r_t,
 		 datab_imag => fft_source_imag_delay_n,
-		 datab_real => fft_source_real_delay_t,
+		 --datab_real => fft_source_real_delay_t,
+		 datab_real => fft_source_real_delay_1_t,
 		 result_imag => rt_i_t,
 		 result_real => rt_r_t);
 
@@ -261,8 +262,10 @@ rt_i<=rt_i_t;
 rt_r<=rt_r_t;
 
 b2v_inst29 : add_ip
-PORT MAP(datab => fft_source_imag_delay_t,
-		 result =>fft_source_imag_delay_n);
+PORT MAP(--datab => fft_source_imag_delay_t,
+         
+         datab => fft_source_imag_delay_1_t,
+         result =>fft_source_imag_delay_n);
 
 
 b2v_inst3 : fft_ip
@@ -427,9 +430,11 @@ PORT MAP(rst_n => rst_n,
 		 clk => clk,
 		 source_valid => fft_source_valid_t,
 		 source_sop => fft_source_sop_t,
-		 din_imag => fft_source_imag_delay_1_t,
+		 --din_imag => fft_source_imag_delay_1_t,
+		 din_imag => fft_source_imag_t,
 		 din_imag_clc => rt_i_t,
-		 din_real => fft_source_real_delay_1_t,
+		 --din_real => fft_source_real_delay_1_t,
+		 din_real => fft_source_real_t,
 		 din_real_clc => rt_r_t,
 		 sink_sop => demap_sink_sop,
 		 sink_eop => demap_sink_eop_t,
@@ -437,7 +442,6 @@ PORT MAP(rst_n => rst_n,
 		 dout => demap_d,
 		 dout_imag => a_i,
 		 dout_real => a_r_t);
-		 
 		 
   a_r<=a_r_t;
 

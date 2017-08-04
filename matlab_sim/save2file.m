@@ -6,7 +6,7 @@ end
 
 f = fopen(filepath, 'w');
 for i = 1:1:length(data_array)
-    fprintf('%d\n',data_array(i));
+    fprintf(f,'%d\n',data_array(i));
 end
 fclose(f);
 
