@@ -26,7 +26,7 @@ architecture rtl of data_out is
        end if;
   end process;
   
-    process(state) is
+    process(state,sink_eop) is
      begin
         case state is
 		     when s_rst =>

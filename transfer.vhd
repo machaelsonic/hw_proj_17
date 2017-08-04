@@ -228,7 +228,7 @@ b2v_inst1 : fft_ip
 PORT MAP(clk => clk,
 		 reset_n => rst_n,
 		 clk_ena => '1',
-		 inverse => '0',
+		 inverse => '1',
 		 sink_valid => ifft_data_valid_t,
 		 --sink_valid => '1',
 		 sink_sop => ifft_sop_t,

@@ -86,7 +86,8 @@ constant coef: rom:=('1','1','1','1','0','0','1','1','1','1','1','0','0','0','1'
           variable tmp: std_logic_vector(20 downto 0);
           begin
 			 if rst_n='0' then
-			   dout1<=(others=>'0');
+			    dout1<=(others=>'0');
+			    tmp:=(others=>'0');
           elsif clk'event and clk='1' then
             tmp:=(others=>'0');
             for i in 0 to 255 loop --255
@@ -114,8 +115,9 @@ constant coef: rom:=('1','1','1','1','0','0','1','1','1','1','1','0','0','0','1'
           variable tmp: std_logic_vector(20 downto 0);
           begin
 			 if rst_n='0' then
-			  dout2<=(others=>'0');
-          elsif clk'event and clk='1' then
+			   dout2<=(others=>'0');
+			   tmp:=(others=>'0');
+       elsif clk'event and clk='1' then
             tmp:=(others=>'0');
             for i in 0 to 255 loop --255
              tmp:=tmp+reg4(i);

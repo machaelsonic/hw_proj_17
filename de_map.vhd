@@ -103,17 +103,17 @@ architecture rtl of de_map is
 --	  end if; 
 --end process;
 
-	 tmp_real<=tmp_real1;
-	 tmp_imag<=tmp_imag1;
-    source_valid_t<=source_valid_t2;	 
---    tmp_real<=din_real;
---	 tmp_imag<=din_imag;
---    source_valid_t<=source_valid_t1;			 
+	 -- tmp_real<=tmp_real1;
+	 -- tmp_imag<=tmp_imag1;
+    -- source_valid_t<=source_valid_t2;	 
+     tmp_real<=din_real;
+	 tmp_imag<=din_imag;
+     source_valid_t<=source_valid;			 
    process(rst_n,clk) is
      begin
        if rst_n='0' then
 		    tmp_real1<=(others=>'0');
-          tmp_imag1<=(others=>'0');
+            tmp_imag1<=(others=>'0');
 			 source_valid_t1<='0';
 			 source_valid_t2<='0';
        elsif clk'event and clk='1' then
