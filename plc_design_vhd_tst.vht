@@ -116,6 +116,7 @@ COMPONENT plc_design
 		rst_n_tx :  IN  STD_LOGIC;
 		en :  IN  STD_LOGIC;
 		datain :  IN  STD_LOGIC_VECTOR(35 DOWNTO 0);
+		rcv_en: in std_logic;
 		receiver_din: IN  STD_LOGIC_VECTOR(11 DOWNTO 0);
 		ifft_sink_ready :  OUT  STD_LOGIC;
 		ifft_source_sop :  OUT  STD_LOGIC;
@@ -203,8 +204,11 @@ FILE tb_rx_data:TEXT OPEN READ_MODE IS "tb_rx_data_in.txt";
 
 signal  rx_data_from_file:  STD_LOGIC_VECTOR(11 DOWNTO 0);
 signal  rx_data_from_file_int_signal:  integer;
+signal tx_data_valid_n:std_logic;
 
 BEGIN
+
+  tx_data_valid_n<=not tx_data_valid;
 	i1 : plc_design
 	PORT MAP (
 -- list connections between master ports and signals
@@ -212,9 +216,12 @@ BEGIN
 	clk_tx => clk_tx,
 	cnt => cnt,
 	cnt_o => cnt_o,
+	
 	datain => datain,
-	--receiver_din =>tx_data_o,
-	receiver_din =>rx_data_from_file,
+	--rcv_en => tx_data_valid_n,
+	rcv_en => '1',
+	receiver_din =>tx_data_o,
+	--receiver_din =>rx_data_from_file,
 	demap_dout => demap_dout,
 	demap_sink_eop => demap_sink_eop,
 	demap_sink_sop => demap_sink_sop,
@@ -287,7 +294,7 @@ init : PROCESS
 -- variable declarations                                     
 BEGIN 
     rst_n_tx<='0';
-	 wait for 770 ns;                                                        
+	 wait for 77 ns;                                                        
     rst_n_tx<='1';
     wait;    -- code that executes only once                      
 END PROCESS init;   
@@ -315,13 +322,21 @@ END PROCESS always;
 			 elsif clk_tx'event and clk_tx='1' then
 			    if cnt_1=2299 then
 				    cnt_1<=0;
-					 d_t<='1';
+					 --d_t<='1';
 					 tmp<=tmp+1;
 				 else
 				    cnt_1<=cnt_1+1;
-					 d_t<='0';
+					 --d_t<='0';
 					 tmp<=tmp;
 				end if;
+				case cnt_1 is  
+				
+				   --when 2299|2298 =>
+				   when 2299  =>
+				      d_t<='1';
+				   when others =>
+				      d_t<='0';
+				end case;
 		    end if;
 			 
 		end process;
@@ -410,18 +425,18 @@ process(clk_tx) is
 		end if;
 	end process; 
 	
-process(clk_tx) is
- 	VARIABLE lo_1:LINE;
- 	variable rx_data_from_file_int: integer range -1024 to 1023;
-    BEGIN
-	     if rising_edge(clk_tx) then
-		     --READLINE (lo_1,tb_rx_data);
-			 READLINE (tb_rx_data,lo_1);
-			 READ (lo_1,rx_data_from_file_int);
-			end if;
-		rx_data_from_file_int_signal<=rx_data_from_file_int;	
-		rx_data_from_file<=std_logic_vector(to_signed(rx_data_from_file_int,12));	
-	end process;	
+-- process(clk_tx) is
+ 	-- VARIABLE lo_1:LINE;
+ 	-- variable rx_data_from_file_int: integer range -1024 to 1023;
+    -- BEGIN
+	     -- if rising_edge(clk_tx) then
+		     -- --READLINE (lo_1,tb_rx_data);
+			 -- READLINE (tb_rx_data,lo_1);
+			 -- READ (lo_1,rx_data_from_file_int);
+			-- end if;
+		-- rx_data_from_file_int_signal<=rx_data_from_file_int;	
+		-- rx_data_from_file<=std_logic_vector(to_signed(rx_data_from_file_int,12));	
+	-- end process;	
 	
                                                                      
 END plc_design_arch;

@@ -26,6 +26,7 @@ ENTITY receiver IS
 	(
 		rst :  IN  STD_LOGIC;
 		clk :  IN  STD_LOGIC;
+		rcv_en: in std_logic;
 		data_in :  IN  STD_LOGIC_VECTOR(11 DOWNTO 0);
 		fft_sink_ready :  OUT  STD_LOGIC;
 		fft_source_sop :  OUT  STD_LOGIC;
@@ -407,7 +408,7 @@ b2v_inst8 : fifo_256
   generic MAP (N=>8) 
   port MAP (rst_n =>rst_n,
             clk =>clk,
-			en => '1',
+			en => rcv_en,
 		    din => data_in,
             dout =>rcv_data_t);
  

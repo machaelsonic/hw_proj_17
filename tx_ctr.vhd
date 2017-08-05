@@ -45,11 +45,11 @@ process(rst_n,clk) is
  end process;
 
 
-  process(state,en,cnt) is
+  process(state,rst_n,en,cnt) is
     begin
       case state is
         when s_rst =>
-          if rst_n='1' then
+          if rst_n<='1' then
              next_state<=s_idle;
           else
              next_state<=s_rst;
@@ -79,16 +79,16 @@ process(rst_n,clk) is
        begin
          case state is
            when s_rst =>
-              cnt_en1<='0';
+                  cnt_en1<='0';
 				  send_data_valid<='0';
            when s_idle =>
-              cnt_en1<='0';
+                  cnt_en1<='0';
 				  send_data_valid<='0';
 			  when s_send =>
-              cnt_en1<='1';
+                  cnt_en1<='1';
 				  send_data_valid<='1'; 
 			  when s_idle1 =>
-              cnt_en1<='1';
+                  cnt_en1<='1';
 				  send_data_valid<='0';  
          end case;
   end process;
@@ -102,7 +102,7 @@ process(rst_n,clk) is
          sta<=next_sta;
        end if;
  end process;
-  process(sta,flag,cnt,tmp) is
+  process(sta,rst_n,flag,cnt,tmp) is
       begin 
 		  case sta is
 		     when s_rst =>
@@ -225,7 +225,7 @@ cnt_o<=conv_std_logic_vector(cnt,10);
              sta1<=next_sta1;
 		    end if;	 
 		end process;	
-	process(sta1,en,ifft_eop) is
+	process(sta1,rst_n,en,ifft_eop) is
      begin
 	    case sta1 is
 		   when s_rst =>

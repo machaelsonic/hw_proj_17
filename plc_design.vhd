@@ -28,6 +28,7 @@ ENTITY plc_design IS
 		rst_n_tx :  IN  STD_LOGIC;
 		en :  IN  STD_LOGIC;
 		datain :  IN  STD_LOGIC_VECTOR(35 DOWNTO 0);
+		rcv_en: in std_logic;
 		receiver_din: IN  STD_LOGIC_VECTOR(11 DOWNTO 0);
 		ifft_sink_ready :  OUT  STD_LOGIC;
 		ifft_source_sop :  OUT  STD_LOGIC;
@@ -104,6 +105,7 @@ ARCHITECTURE bdf_type OF plc_design IS
 COMPONENT receiver
 	PORT(clk : IN STD_LOGIC;
 		 rst : IN STD_LOGIC;
+		 rcv_en: in std_logic;
 		 data_in : IN STD_LOGIC_VECTOR(11 DOWNTO 0);
 		 pre_cnt : OUT STD_LOGIC;
 		 fft_sink_ready : OUT STD_LOGIC;
@@ -187,17 +189,21 @@ END COMPONENT;
 
 SIGNAL	rst_n_tx_syn :  STD_LOGIC;
 SIGNAL	rst_rx_syn :  STD_LOGIC;
-SIGNAL	rst_tx :  STD_LOGIC;
---SIGNAL	tx_data_o,receiver_din:  STD_LOGIC_VECTOR(11 DOWNTO 0);
+SIGNAL	rst_tx:  STD_LOGIC;
+ signal rst_rcv:std_logic;
 
 
 BEGIN 
 
-
-
+-- tx_data_valid<=tx_data_valid_t;
+ -- tx_data_valid_n<= not (tx_data_valid_t);
+ rst_rcv<= rst_rx_syn or not(rcv_en);
+ 
 b2v_inst : receiver
 PORT MAP(clk => clk_tx,
-		 rst => rst_rx_syn,
+		 --rst => rst_rcv,
+		 rst =>rst_rx_syn,
+		 rcv_en  => rcv_en ,
 		 data_in => receiver_din,
 		 pre_cnt => pre_cnt,
 		 fft_sink_ready => fft_sink_ready,
