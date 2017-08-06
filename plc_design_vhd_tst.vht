@@ -109,6 +109,9 @@ SIGNAL tx_data_valid : STD_LOGIC;
 SIGNAL wr_sel : STD_LOGIC;
 SIGNAL x_cor1 : STD_LOGIC_VECTOR(20 DOWNTO 0);
 SIGNAL x_cor2 : STD_LOGIC_VECTOR(20 DOWNTO 0);
+SIGNAL c0:std_logic;
+SIGNAL c1:std_logic;
+
 COMPONENT plc_design
 	PORT
 	(
@@ -184,7 +187,9 @@ COMPONENT plc_design
 		syn_point :  OUT  STD_LOGIC_VECTOR(8 DOWNTO 0);
 		tx_data_o :  OUT  STD_LOGIC_VECTOR(11 DOWNTO 0);
 		x_cor1 :  OUT  STD_LOGIC_VECTOR(20 DOWNTO 0);
-		x_cor2 :  OUT  STD_LOGIC_VECTOR(20 DOWNTO 0)
+		x_cor2 :  OUT  STD_LOGIC_VECTOR(20 DOWNTO 0);
+		c0:out std_logic;
+		c1:out std_logic
 	);
 END COMPONENT;
 signal cnt_1:integer range 0 to 2299;
@@ -287,7 +292,9 @@ BEGIN
 	tx_data_valid => tx_data_valid,
 	wr_sel => wr_sel,
 	x_cor1 => x_cor1,
-	x_cor2 => x_cor2
+	x_cor2 => x_cor2,
+	c0 =>c0,
+	c1 =>c1
 	);
 
 init : PROCESS                                               

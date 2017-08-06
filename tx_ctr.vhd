@@ -7,28 +7,28 @@ entity tx_ctr is
        clk: in std_logic;
        en: in std_logic;
        din:in std_logic_vector(35 downto 0);
-		 ifft_eop:in std_logic;		 
+	   ifft_eop:in std_logic;		 
        rd_en:out std_logic;
        adr:out std_logic_vector(7 downto 0);
-		 cnt_o:OUT STD_LOGIC_VECTOR(9 DOWNTO 0);
-		 send_data_valid:out std_logic;
+	   cnt_o:OUT STD_LOGIC_VECTOR(9 DOWNTO 0);
+	   send_data_valid:out std_logic;
        ram_data_valid: out std_logic;
-		 flag_o:out std_logic;
-		 dout:out std_logic_vector(35 downto 0));
+	   flag_o:out std_logic;
+	   dout:out std_logic_vector(35 downto 0));
 end entity tx_ctr;
 
 architecture rtl of tx_ctr is
 
 signal cnt_en1,cnt_en2,rd_en_t,rd_en_t1:std_logic;
 signal tmp:std_logic_vector(7 downto 0);
-signal cnt:integer range 0 to 767;
-type state_t is (s_rst,s_idle,s_send,s_idle1);
+signal cnt:integer range 0 to 1023;
+type state_t is (s_rst,s_idle,s_send,s_idle1);--control state machine for sending of OFDM syble
 signal state,next_state: state_t;
 
-type state_t1 is (s_rst,s_idle,s_rd);
+type state_t1 is (s_rst,s_idle,s_rd);  --control state machine for reading of preamble
 signal sta,next_sta: state_t1;
 
-type state_t2 is (s_rst,s_idle,s1,s2);
+type state_t2 is (s_rst,s_idle,s1,s2); 
 signal sta1,next_sta1: state_t2;
 
 signal flag:std_logic;
@@ -61,16 +61,18 @@ process(rst_n,clk) is
              next_state<=s_idle;
           end if;
         when s_send => 
-	       if cnt=511 then
+	       --if cnt=511 then  -- 2 symble
+		   if cnt=767  then --3 symble
               next_state<=s_idle1;
-			 else
-				  next_state<=s_send;
+		   else
+			  next_state<=s_send;
 			 end if; 
         when s_idle1 => 
-	       if cnt=767 then
-              next_state<=s_idle;
-			 else
-				  next_state<=s_idle1;
+	       --if cnt=767 then -- 2 symble
+		   if cnt=1023 then -- 3 symble
+               next_state<=s_idle;
+		   else
+			   next_state<=s_idle1;
 			 end if; 
       end case;
   end process;
@@ -113,18 +115,18 @@ process(rst_n,clk) is
              end if;
            when s_idle =>
 		       if flag='0' then
-			      if  cnt=535 then
-			         next_sta<=s_rd;
-				   else
+			      if  cnt=535 then  
+			          next_sta<=s_rd;
+				  else
 				      next_sta<=s_idle; 
-				   end if;
+				  end if;
 			   else
-		        if  cnt=534 then
-                next_sta<=s_rd;
-              else
-                next_sta<=s_idle;
-              end if;
-			   end if;   
+		          if  cnt=534 then 
+                     next_sta<=s_rd;
+                  else
+                     next_sta<=s_idle;
+                 end if;
+			  end if;   
 		  when s_rd =>
 		     if tmp=255 then
 			     next_sta<=s_idle;
@@ -139,13 +141,13 @@ process(rst_n,clk) is
          case sta is
            when s_rst =>
               rd_en_t<='0';
-				  cnt_en2<='0';
+			  cnt_en2<='0';
            when s_idle =>
               rd_en_t<='0';
-				  cnt_en2<='0';
+			  cnt_en2<='0';
            when s_rd =>
               rd_en_t<='1';
-				  cnt_en2<='1';
+			  cnt_en2<='1';
          end case;
      end process;
 	  
@@ -171,9 +173,9 @@ process(rst_n,clk) is
       elsif clk'event and clk='1' then
          if cnt_en2='1' then
            if tmp=255 then 
-			     tmp<=(others=>'0');
+			  tmp<=(others=>'0');
            else
-            tmp<=tmp+1;
+              tmp<=tmp+1;
            end if;
          else
            tmp<=(others=>'0');
@@ -192,14 +194,14 @@ process(rst_n,clk) is
         cnt<=0;
       elsif clk'event and clk='1' then
          if cnt_en1='1' then
-           --if cnt=511 then 
-			  if cnt=767 then
+			--if cnt=767 then
+			if cnt=1023 then
 			     cnt<=0;
-           else
-            cnt<=cnt+1;
-           end if;
+            else
+               cnt<=cnt+1;
+            end if;
          else
-           cnt<=0;
+            cnt<=0;
         end if;
       end if; 
   end process;
@@ -225,7 +227,9 @@ cnt_o<=conv_std_logic_vector(cnt,10);
              sta1<=next_sta1;
 		    end if;	 
 		end process;	
-	process(sta1,rst_n,en,ifft_eop) is
+		
+		
+process(sta1,rst_n,en,cnt,ifft_eop) is
      begin
 	    case sta1 is
 		   when s_rst =>
@@ -241,21 +245,23 @@ cnt_o<=conv_std_logic_vector(cnt,10);
 				   next_sta1<=s_idle;
 				 end if;
 			when s1 =>
-		      if ifft_eop='1' then
+		      --if ifft_eop='1' then
+			    if cnt=255 then
 			      next_sta1<=s2;
 				else
 			      next_sta1<=s1;
 				end if;
 			when s2 =>
-		      if en='1' then
-			      next_sta1<=s1;
+			    --if ifft_eop='1' then
+				if cnt=767 then
+			      next_sta1<=s_idle;
 				else
 			      next_sta1<=s2;
 				end if;
 			end case;
 		end process;
-	
-   process(sta1) is
+		
+   process(sta1,din) is
      begin
 	    case sta1 is
 		   when s_rst =>

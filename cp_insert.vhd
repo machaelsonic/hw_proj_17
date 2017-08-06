@@ -63,7 +63,8 @@ COMPONENT ifft_ram_rd_ctr
 		 flag_o1 : OUT STD_LOGIC;
 		 flag_eop : OUT STD_LOGIC;
 		 rd_adr : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
-		 rd_cnt_o : OUT STD_LOGIC_VECTOR(8 DOWNTO 0)
+		 rd_cnt_o : OUT STD_LOGIC_VECTOR(8 DOWNTO 0);
+		 ram_aclr:out std_logic
 	);
 END COMPONENT;
 
@@ -89,13 +90,16 @@ COMPONENT d_sel
 END COMPONENT;
 
 COMPONENT ifft_ram
-	PORT(wren : IN STD_LOGIC;
-		 rden : IN STD_LOGIC;
-		 clock : IN STD_LOGIC;
-		 data : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-		 rdaddress : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
-		 wraddress : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
-		 q : OUT STD_LOGIC_VECTOR(15 DOWNTO 0)
+  port
+	(
+		aclr		: IN STD_LOGIC  := '0';
+		clock		: IN STD_LOGIC  := '1';
+		data		: IN STD_LOGIC_VECTOR (15 DOWNTO 0);
+		rdaddress		: IN STD_LOGIC_VECTOR (7 DOWNTO 0);
+		rden		: IN STD_LOGIC  := '1';
+		wraddress		: IN STD_LOGIC_VECTOR (7 DOWNTO 0);
+		wren		: IN STD_LOGIC  := '0';
+		q		: OUT STD_LOGIC_VECTOR (15 DOWNTO 0)
 	);
 END COMPONENT;
 
@@ -116,7 +120,7 @@ SIGNAL	wr_sel_t :  STD_LOGIC;
 SIGNAL	wr_sel_n :  STD_LOGIC;
 SIGNAL	ram1_d_t :  STD_LOGIC_VECTOR(15 DOWNTO 0);
 SIGNAL	ram2_d_t :  STD_LOGIC_VECTOR(15 DOWNTO 0);
-
+SIGNAL	ram_aclr:  STD_LOGIC;
 
 BEGIN 
 dout <=dout_t;
@@ -144,7 +148,8 @@ PORT MAP(rst_n => rst_n,
 		 flag_o1 => flag_o1,
 		 flag_eop => flag_eop,
 		 rd_adr => rd_adr_t,
-		 rd_cnt_o => rd_cnt_o);
+		 rd_cnt_o => rd_cnt_o,
+		 ram_aclr =>ram_aclr);
 
 
 b2v_inst1 : ifft_ram_wr_ctr
@@ -179,7 +184,8 @@ PORT MAP(sel => rd_data_sel_t,
 
 
 b2v_inst6 : ifft_ram
-PORT MAP(wren => wr_en_1,
+PORT MAP(aclr =>ram_aclr,
+         wren => wr_en_1,
 		 rden => rd_en_1,
 		 clock => clk,
 		 data => dout_t,
@@ -189,7 +195,8 @@ PORT MAP(wren => wr_en_1,
 
 
 b2v_inst7 : ifft_ram
-PORT MAP(wren => wr_en_2,
+PORT MAP(aclr =>ram_aclr,
+         wren => wr_en_2,
 		 rden => rd_en_2,
 		 clock => clk,
 		 data => dout_t,

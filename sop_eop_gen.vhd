@@ -13,7 +13,8 @@ end entity sop_eop_gen;
 architecture rtl of sop_eop_gen is
   type state_t is (s_rst,s_idle,s_sop);
   signal state,next_state: state_t;
-  signal cnt:integer range 0 to 565; --538
+  --signal cnt:integer range 0 to 565; --538
+  signal cnt:integer range 0 to 851; --538
   signal cnt_en: std_logic;
   begin
   process(rst_n,clk) is
@@ -41,7 +42,8 @@ architecture rtl of sop_eop_gen is
 			     next_state<=s_idle;
 			  end if;
 			when s_sop =>
-			   if cnt=565 then
+			   --if cnt=565 then
+			     if cnt=851 then
 				   next_state<=s_idle;
 			   else
 				   next_state<=s_sop;
@@ -70,35 +72,33 @@ process(rst_n,clk) is
 		 eop<='0';
 	  elsif clk'event and clk='1' then
 	    if cnt_en='1' then
-		     if cnt=565 then
+		     --if cnt=565 then
+			 if cnt=851 then
 			      cnt<=0;
 			  else
 			     cnt<=cnt+1;
 			  end if;	
-			  if cnt=24  or cnt=310 then
+			  if cnt=24  or cnt=310 or cnt=596 then
 				   sop<='1';
 			  else
-					sop<='0';
+				   sop<='0';
 			  end if;
 					 
-			  if cnt=279 or cnt=565 then
+			  if cnt=279 or cnt=565  or cnt=851 then
 					 eop<='1';
 			  else
 					 eop<='0';
 			  end if;
 			  
-			  if (cnt>=24 and cnt<=279) or (cnt>=310 and cnt<=565)then
+			  
+			  
+			  if (cnt>=24 and cnt<=279) or (cnt>=310 and cnt<=565) or (cnt>=596 and cnt<=851)then
 					 data_valid<='1';
 			  else
 					 data_valid<='0';
 			  end if;
---          if (cnt>=409 and cnt<=4097) then
---			     data_valid<='1';
---			 else
---			     data_valid<='0';
---			 end if;
 		  else
-		     cnt<=0;
+		      cnt<=0;
 			  data_valid<='0';
 			  sop<='0';
 			  eop<='0';

@@ -42,6 +42,7 @@ USE altera_mf.all;
 ENTITY ifft_ram IS
 	PORT
 	(
+		aclr		: IN STD_LOGIC  := '0';
 		clock		: IN STD_LOGIC  := '1';
 		data		: IN STD_LOGIC_VECTOR (15 DOWNTO 0);
 		rdaddress		: IN STD_LOGIC_VECTOR (7 DOWNTO 0);
@@ -83,6 +84,7 @@ ARCHITECTURE SYN OF ifft_ram IS
 		width_byteena_a		: NATURAL
 	);
 	PORT (
+			aclr0	: IN STD_LOGIC ;
 			address_a	: IN STD_LOGIC_VECTOR (7 DOWNTO 0);
 			clock0	: IN STD_LOGIC ;
 			data_a	: IN STD_LOGIC_VECTOR (15 DOWNTO 0);
@@ -98,7 +100,7 @@ BEGIN
 
 	altsyncram_component : altsyncram
 	GENERIC MAP (
-		address_aclr_b => "NONE",
+		address_aclr_b => "CLEAR0",
 		address_reg_b => "CLOCK0",
 		clock_enable_input_a => "BYPASS",
 		clock_enable_input_b => "BYPASS",
@@ -108,7 +110,7 @@ BEGIN
 		numwords_a => 256,
 		numwords_b => 256,
 		operation_mode => "DUAL_PORT",
-		outdata_aclr_b => "NONE",
+		outdata_aclr_b => "CLEAR0",
 		outdata_reg_b => "UNREGISTERED",
 		power_up_uninitialized => "FALSE",
 		rdcontrol_reg_b => "CLOCK0",
@@ -120,6 +122,7 @@ BEGIN
 		width_byteena_a => 1
 	)
 	PORT MAP (
+		aclr0 => aclr,
 		address_a => wraddress,
 		clock0 => clock,
 		data_a => data,
@@ -149,8 +152,8 @@ END SYN;
 -- Retrieval info: PRIVATE: CLOCK_ENABLE_OUTPUT_A NUMERIC "0"
 -- Retrieval info: PRIVATE: CLOCK_ENABLE_OUTPUT_B NUMERIC "0"
 -- Retrieval info: PRIVATE: CLRdata NUMERIC "0"
--- Retrieval info: PRIVATE: CLRq NUMERIC "0"
--- Retrieval info: PRIVATE: CLRrdaddress NUMERIC "0"
+-- Retrieval info: PRIVATE: CLRq NUMERIC "1"
+-- Retrieval info: PRIVATE: CLRrdaddress NUMERIC "1"
 -- Retrieval info: PRIVATE: CLRrren NUMERIC "0"
 -- Retrieval info: PRIVATE: CLRwraddress NUMERIC "0"
 -- Retrieval info: PRIVATE: CLRwren NUMERIC "0"
@@ -170,7 +173,7 @@ END SYN;
 -- Retrieval info: PRIVATE: MEM_IN_BITS NUMERIC "0"
 -- Retrieval info: PRIVATE: MIFfilename STRING ""
 -- Retrieval info: PRIVATE: OPERATION_MODE NUMERIC "2"
--- Retrieval info: PRIVATE: OUTDATA_ACLR_B NUMERIC "0"
+-- Retrieval info: PRIVATE: OUTDATA_ACLR_B NUMERIC "1"
 -- Retrieval info: PRIVATE: OUTDATA_REG_B NUMERIC "0"
 -- Retrieval info: PRIVATE: RAM_BLOCK_TYPE NUMERIC "0"
 -- Retrieval info: PRIVATE: READ_DURING_WRITE_MODE_MIXED_PORTS NUMERIC "2"
@@ -196,7 +199,7 @@ END SYN;
 -- Retrieval info: PRIVATE: enable NUMERIC "0"
 -- Retrieval info: PRIVATE: rden NUMERIC "1"
 -- Retrieval info: LIBRARY: altera_mf altera_mf.altera_mf_components.all
--- Retrieval info: CONSTANT: ADDRESS_ACLR_B STRING "NONE"
+-- Retrieval info: CONSTANT: ADDRESS_ACLR_B STRING "CLEAR0"
 -- Retrieval info: CONSTANT: ADDRESS_REG_B STRING "CLOCK0"
 -- Retrieval info: CONSTANT: CLOCK_ENABLE_INPUT_A STRING "BYPASS"
 -- Retrieval info: CONSTANT: CLOCK_ENABLE_INPUT_B STRING "BYPASS"
@@ -206,7 +209,7 @@ END SYN;
 -- Retrieval info: CONSTANT: NUMWORDS_A NUMERIC "256"
 -- Retrieval info: CONSTANT: NUMWORDS_B NUMERIC "256"
 -- Retrieval info: CONSTANT: OPERATION_MODE STRING "DUAL_PORT"
--- Retrieval info: CONSTANT: OUTDATA_ACLR_B STRING "NONE"
+-- Retrieval info: CONSTANT: OUTDATA_ACLR_B STRING "CLEAR0"
 -- Retrieval info: CONSTANT: OUTDATA_REG_B STRING "UNREGISTERED"
 -- Retrieval info: CONSTANT: POWER_UP_UNINITIALIZED STRING "FALSE"
 -- Retrieval info: CONSTANT: RDCONTROL_REG_B STRING "CLOCK0"
@@ -216,6 +219,7 @@ END SYN;
 -- Retrieval info: CONSTANT: WIDTH_A NUMERIC "16"
 -- Retrieval info: CONSTANT: WIDTH_B NUMERIC "16"
 -- Retrieval info: CONSTANT: WIDTH_BYTEENA_A NUMERIC "1"
+-- Retrieval info: USED_PORT: aclr 0 0 0 0 INPUT GND "aclr"
 -- Retrieval info: USED_PORT: clock 0 0 0 0 INPUT VCC "clock"
 -- Retrieval info: USED_PORT: data 0 0 16 0 INPUT NODEFVAL "data[15..0]"
 -- Retrieval info: USED_PORT: q 0 0 16 0 OUTPUT NODEFVAL "q[15..0]"
@@ -223,6 +227,7 @@ END SYN;
 -- Retrieval info: USED_PORT: rden 0 0 0 0 INPUT VCC "rden"
 -- Retrieval info: USED_PORT: wraddress 0 0 8 0 INPUT NODEFVAL "wraddress[7..0]"
 -- Retrieval info: USED_PORT: wren 0 0 0 0 INPUT GND "wren"
+-- Retrieval info: CONNECT: @aclr0 0 0 0 0 aclr 0 0 0 0
 -- Retrieval info: CONNECT: @address_a 0 0 8 0 wraddress 0 0 8 0
 -- Retrieval info: CONNECT: @address_b 0 0 8 0 rdaddress 0 0 8 0
 -- Retrieval info: CONNECT: @clock0 0 0 0 0 clock 0 0 0 0
@@ -231,9 +236,9 @@ END SYN;
 -- Retrieval info: CONNECT: @wren_a 0 0 0 0 wren 0 0 0 0
 -- Retrieval info: CONNECT: q 0 0 16 0 @q_b 0 0 16 0
 -- Retrieval info: GEN_FILE: TYPE_NORMAL ifft_ram.vhd TRUE
--- Retrieval info: GEN_FILE: TYPE_NORMAL ifft_ram.inc FALSE
--- Retrieval info: GEN_FILE: TYPE_NORMAL ifft_ram.cmp FALSE
+-- Retrieval info: GEN_FILE: TYPE_NORMAL ifft_ram.inc TRUE
+-- Retrieval info: GEN_FILE: TYPE_NORMAL ifft_ram.cmp TRUE
 -- Retrieval info: GEN_FILE: TYPE_NORMAL ifft_ram.bsf TRUE
--- Retrieval info: GEN_FILE: TYPE_NORMAL ifft_ram_inst.vhd FALSE
+-- Retrieval info: GEN_FILE: TYPE_NORMAL ifft_ram_inst.vhd TRUE
 -- Retrieval info: GEN_FILE: TYPE_NORMAL ifft_ram_syn.v TRUE
 -- Retrieval info: LIB_FILE: altera_mf

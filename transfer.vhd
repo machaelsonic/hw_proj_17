@@ -64,7 +64,9 @@ ENTITY transfer IS
 		ram_wr_adr :  OUT  STD_LOGIC_VECTOR(7 DOWNTO 0);
 		rd_cnt_o :  OUT  STD_LOGIC_VECTOR(8 DOWNTO 0);
 		rom_rd_adr :  OUT  STD_LOGIC_VECTOR(7 DOWNTO 0);
-		tx_data_o :  OUT  STD_LOGIC_VECTOR(11 DOWNTO 0)
+		tx_data_o :  OUT  STD_LOGIC_VECTOR(11 DOWNTO 0);
+		c0:out std_logic;
+		c1:out std_logic
 	);
 END transfer;
 
@@ -150,7 +152,9 @@ COMPONENT tx_data
 		 d1 : IN STD_LOGIC_VECTOR(11 DOWNTO 0);
 		 d2 : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
 		 data_valid : OUT STD_LOGIC;
-		 do : OUT STD_LOGIC_VECTOR(11 DOWNTO 0)
+		 do : OUT STD_LOGIC_VECTOR(11 DOWNTO 0);
+		 c0:out std_logic;
+		 c1:out std_logic 
 	);
 END COMPONENT;
 
@@ -296,7 +300,9 @@ PORT MAP(rst_n => rst_n,
 		 d1 => pre_win_data_t,
 		 d2 => ram_rd_data_t,
 		 data_valid => tx_data_valid,
-		 do => tx_data_o);
+		 do => tx_data_o,
+		 c0 =>c0,
+		 c1 =>c1);
 
 
 b2v_inst5 : tx_ctr
@@ -313,34 +319,7 @@ PORT MAP(rst_n => rst_n,
 		 cnt_o => cnt,
 		 dout => tx_ctr_do_t);
 
-fft_ip_gold : fft_ip
-PORT MAP(clk => clk,
-		 reset_n => rst_n,
-		 clk_ena => '1',
-		 inverse => '0',
-		 --sink_valid => ifft_data_valid_t_gold,
-		 sink_valid => '1',
-		 sink_sop => ifft_sop_t_gold,
-		 sink_eop => ifft_eop_t_gold,
-		 --source_ready => ifft_source_ready_t_gold,
-		 source_ready => '1',
-		 sink_error => "00",
-		 --sink_imag => ifft_dout_imag_t,
-		 sink_imag => (others=>'0'),
-		 
-		 
-		 sink_ready => ifft_sink_ready_t_gold,
-		  sink_real =>a);
-		 --sink_real => ifft_dout_real_t
-		 
-		 -- source_sop => ifft_source_sop_t_gold,
-		 -- source_eop => ifft_source_eop_t_gold,
-		 -- source_valid => ifft_source_ready_t_gold,
-		 -- source_error => ifft_source_error_gold,
-		 -- source_exp => ifft_source_exp_gold,
-		 -- source_imag => ifft_source_imag_gold,
-		 -- source_real => ifft_source_real_t_gold);
-		 
+
 		 
 		 process(rst_n,clk) is
     begin

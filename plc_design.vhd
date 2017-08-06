@@ -96,7 +96,9 @@ ENTITY plc_design IS
 		syn_point :  OUT  STD_LOGIC_VECTOR(8 DOWNTO 0);
 		tx_data_o :  OUT  STD_LOGIC_VECTOR(11 DOWNTO 0);
 		x_cor1 :  OUT  STD_LOGIC_VECTOR(20 DOWNTO 0);
-		x_cor2 :  OUT  STD_LOGIC_VECTOR(20 DOWNTO 0)
+		x_cor2 :  OUT  STD_LOGIC_VECTOR(20 DOWNTO 0);
+		c0:out std_logic;
+		c1:out std_logic
 	);
 END plc_design;
 
@@ -183,7 +185,9 @@ COMPONENT transfer
 		 ram_wr_adr : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
 		 rd_cnt_o : OUT STD_LOGIC_VECTOR(8 DOWNTO 0);
 		 rom_rd_adr : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
-		 tx_data_o : OUT STD_LOGIC_VECTOR(11 DOWNTO 0)
+		 tx_data_o : OUT STD_LOGIC_VECTOR(11 DOWNTO 0);
+		 c0:out std_logic;
+		 c1:out std_logic
 	);
 END COMPONENT;
 
@@ -278,7 +282,9 @@ PORT MAP(rst_n => rst_n_tx_syn,
 		 ram_wr_adr => ram_wr_adr,
 		 rd_cnt_o => rd_cnt_o,
 		 rom_rd_adr => rom_rd_adr,
-		 tx_data_o => tx_data_o);
+		 tx_data_o => tx_data_o,
+		 c0 =>c0,
+		 c1 =>c1);
 
 
 PROCESS(clk_tx)

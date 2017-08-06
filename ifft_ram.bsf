@@ -20,9 +20,9 @@ applicable agreement for further details.
 */
 (header "symbol" (version "1.2"))
 (symbol
-	(rect 0 0 256 160)
+	(rect 0 0 256 168)
 	(text "ifft_ram" (rect 107 0 156 16)(font "Arial" (font_size 10)))
-	(text "inst" (rect 8 144 25 156)(font "Arial" ))
+	(text "inst" (rect 8 152 25 164)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -64,6 +64,13 @@ applicable agreement for further details.
 		(text "clock" (rect 0 0 29 14)(font "Arial" (font_size 8)))
 		(text "clock" (rect 4 114 27 127)(font "Arial" (font_size 8)))
 		(line (pt 0 128)(pt 104 128))
+	)
+	(port
+		(pt 200 168)
+		(input)
+		(text "aclr" (rect 0 0 14 21)(font "Arial" (font_size 8))(vertical))
+		(text "aclr" (rect 186 147 199 163)(font "Arial" (font_size 8))(vertical))
+		(line (pt 200 168)(pt 200 144))
 	)
 	(port
 		(pt 256 88)
@@ -112,6 +119,7 @@ applicable agreement for further details.
 		(line (pt 114 92)(pt 112 94))
 		(line (pt 104 92)(pt 112 92))
 		(line (pt 120 88)(pt 128 88)(line_width 3))
+		(line (pt 116 95)(pt 116 99))
 		(line (pt 112 99)(pt 120 99))
 		(line (pt 120 99)(pt 120 111))
 		(line (pt 120 111)(pt 112 111))
@@ -122,9 +130,9 @@ applicable agreement for further details.
 		(line (pt 120 104)(pt 128 104))
 		(line (pt 104 36)(pt 104 129))
 		(line (pt 0 0)(pt 257 0))
-		(line (pt 257 0)(pt 257 162))
-		(line (pt 0 162)(pt 257 162))
-		(line (pt 0 0)(pt 0 162))
+		(line (pt 257 0)(pt 257 169))
+		(line (pt 0 169)(pt 257 169))
+		(line (pt 0 0)(pt 0 169))
 		(line (pt 0 0)(pt 0 0))
 		(line (pt 0 0)(pt 0 0))
 		(line (pt 0 0)(pt 0 0))
