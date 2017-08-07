@@ -205,8 +205,8 @@ BEGIN
  
 b2v_inst : receiver
 PORT MAP(clk => clk_tx,
-		 --rst => rst_rcv,
-		 rst =>rst_rx_syn,
+		 rst => rst_rcv,
+		 --rst =>rst_rx_syn,
 		 rcv_en  => rcv_en ,
 		 data_in => receiver_din,
 		 pre_cnt => pre_cnt,

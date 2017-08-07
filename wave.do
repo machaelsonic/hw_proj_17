@@ -14,12 +14,16 @@ add wave -noupdate /plc_design_vhd_tst/i1/b2v_inst1/b2v_inst5/cnt
 add wave -noupdate /plc_design_vhd_tst/i1/b2v_inst1/b2v_inst5/sta
 add wave -noupdate /plc_design_vhd_tst/i1/b2v_inst1/b2v_inst5/sta1
 add wave -noupdate -format Analog-Step -height 200 -max 800.0 -min -800.0 -radix decimal /plc_design_vhd_tst/tx_data_o
+add wave -noupdate -format Analog-Step -height 200 -max 500.0 -min -500.0 -radix decimal /plc_design_vhd_tst/rcv_data
 add wave -noupdate /plc_design_vhd_tst/ifft_eop
 add wave -noupdate /plc_design_vhd_tst/ifft_sop
 add wave -noupdate /plc_design_vhd_tst/ifft_source_eop
 add wave -noupdate /plc_design_vhd_tst/ifft_source_sop
 add wave -noupdate -format Analog-Step -height 74 -max 300.0 -min -300.0 -radix decimal /plc_design_vhd_tst/ifft_source_real
 add wave -noupdate /plc_design_vhd_tst/rom_rd_en
+add wave -noupdate /plc_design_vhd_tst/i1/b2v_inst/b2v_inst3/sink_ready
+add wave -noupdate /plc_design_vhd_tst/i1/b2v_inst/rcv_en
+add wave -noupdate /plc_design_vhd_tst/i1/b2v_inst/rst
 add wave -noupdate -divider {New Divider}
 add wave -noupdate /plc_design_vhd_tst/i1/b2v_inst1/b2v_inst3/b2v_inst/state
 add wave -noupdate /plc_design_vhd_tst/i1/b2v_inst1/b2v_inst3/b2v_inst/next_state
@@ -42,7 +46,7 @@ add wave -noupdate /plc_design_vhd_tst/a_r
 add wave -noupdate /plc_design_vhd_tst/clk_tx
 add wave -noupdate /plc_design_vhd_tst/cnt
 add wave -noupdate /plc_design_vhd_tst/cnt_o
-add wave -noupdate /plc_design_vhd_tst/demap_dout
+add wave -noupdate -radix hexadecimal /plc_design_vhd_tst/demap_dout
 add wave -noupdate /plc_design_vhd_tst/demap_sink_eop
 add wave -noupdate /plc_design_vhd_tst/demap_sink_sop
 add wave -noupdate /plc_design_vhd_tst/demap_sink_valid
@@ -98,7 +102,6 @@ add wave -noupdate -radix decimal -childformat {{/plc_design_vhd_tst/ram_rd_data
 add wave -noupdate /plc_design_vhd_tst/ram_rd_en
 add wave -noupdate /plc_design_vhd_tst/ram_wr_adr
 add wave -noupdate /plc_design_vhd_tst/ram_wr_en
-add wave -noupdate -format Analog-Step -height 74 -max 499.99999999999994 -min -500.0 -radix decimal /plc_design_vhd_tst/rcv_data
 add wave -noupdate /plc_design_vhd_tst/rcv_data_delay
 add wave -noupdate /plc_design_vhd_tst/rd_cnt_o
 add wave -noupdate /plc_design_vhd_tst/rd_continue_o
@@ -121,7 +124,7 @@ add wave -noupdate /plc_design_vhd_tst/ifft_sop_t
 add wave -noupdate /plc_design_vhd_tst/rx_data_from_file
 add wave -noupdate /plc_design_vhd_tst/rx_data_from_file_int_signal
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {8280000 ps} 0}
+WaveRestoreCursors {{Cursor 1} {124160000 ps} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 380
 configure wave -valuecolwidth 100
@@ -137,4 +140,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ps
 update
-WaveRestoreZoom {0 ps} {172956 ns}
+WaveRestoreZoom {0 ps} {435834 ns}
