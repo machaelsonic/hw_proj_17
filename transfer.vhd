@@ -198,8 +198,8 @@ SIGNAL	 ifft_sink_ready_t: std_logic;
 signal cnt_t: integer range 0 to 255;
 signal ifft_sop_t_gold,ifft_eop_t_gold,ifft_sink_ready_t_gold:  STD_LOGIC; 
 signal a: std_logic_vector(11 downto 0);
-
-
+signal en_d,ffr_rst_n,en_delay_8:std_logic;
+signal tmp: std_logic_vector(7 downto 0);
 
 
 BEGIN 
@@ -227,10 +227,34 @@ PORT MAP(rden => rom_rd_en_t,
 		 address => rom_rd_adr_t,
 		 q => pre_win_data_t);
 
-
+ process(rst_n,clk) is   
+   begin 
+      if rst_n='0' then 
+	     en_d<='0';
+	  elsif clk'event and clk='1' then
+	     en_d<=en;
+	  end if;
+	  
+	  ffr_rst_n<=rst_n and (not(en_d) or en);
+ end process;
+ 
+ process(rst_n,clk) is   
+   begin 
+      if rst_n='0' then 
+	     tmp<=(others=>'0');
+	  elsif clk'event and clk='1' then
+	     tmp(0)<=en;
+	     for i in 0 to 6 loop
+		   tmp(i+1)<=tmp(i);
+		   end loop;
+		  en_delay_8<=tmp(7);
+	  end if;
+ end process;
+ 
 b2v_inst1 : fft_ip
 PORT MAP(clk => clk,
-		 reset_n => rst_n,
+		 --reset_n => rst_n ,
+		 reset_n =>ffr_rst_n,
 		 clk_ena => '1',
 		 inverse => '1',
 		 sink_valid => ifft_data_valid_t,
@@ -308,7 +332,8 @@ PORT MAP(rst_n => rst_n,
 b2v_inst5 : tx_ctr
 PORT MAP(rst_n => rst_n,
 		 clk => clk,
-		 en => en,
+		 --en => en,
+		 en => en_delay_8,
 		 ifft_eop => ifft_eop_t,
 		 din => din,
 		 rd_en => rom_rd_en_t,

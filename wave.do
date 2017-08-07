@@ -18,7 +18,7 @@ add wave -noupdate /plc_design_vhd_tst/ifft_eop
 add wave -noupdate /plc_design_vhd_tst/ifft_sop
 add wave -noupdate /plc_design_vhd_tst/ifft_source_eop
 add wave -noupdate /plc_design_vhd_tst/ifft_source_sop
-add wave -noupdate /plc_design_vhd_tst/ifft_source_real
+add wave -noupdate -format Analog-Step -height 74 -max 300.0 -min -300.0 -radix decimal /plc_design_vhd_tst/ifft_source_real
 add wave -noupdate /plc_design_vhd_tst/rom_rd_en
 add wave -noupdate -divider {New Divider}
 add wave -noupdate /plc_design_vhd_tst/i1/b2v_inst1/b2v_inst3/b2v_inst/state
@@ -66,18 +66,25 @@ add wave -noupdate /plc_design_vhd_tst/flag_eop
 add wave -noupdate /plc_design_vhd_tst/flag_o
 add wave -noupdate /plc_design_vhd_tst/flag_o1
 add wave -noupdate /plc_design_vhd_tst/ifft_data
-add wave -noupdate /plc_design_vhd_tst/ifft_data_valid
-add wave -noupdate /plc_design_vhd_tst/ifft_dout_imag
-add wave -noupdate /plc_design_vhd_tst/ifft_dout_real
-add wave -noupdate /plc_design_vhd_tst/ifft_eop
+add wave -noupdate -divider {New Divider}
 add wave -noupdate /plc_design_vhd_tst/ifft_sink_ready
+add wave -noupdate /plc_design_vhd_tst/ifft_data_valid
 add wave -noupdate /plc_design_vhd_tst/ifft_sop
-add wave -noupdate /plc_design_vhd_tst/ifft_source_eop
-add wave -noupdate /plc_design_vhd_tst/ifft_source_error
-add wave -noupdate /plc_design_vhd_tst/ifft_source_exp
-add wave -noupdate /plc_design_vhd_tst/ifft_source_imag
-add wave -noupdate /plc_design_vhd_tst/ifft_source_real
+add wave -noupdate /plc_design_vhd_tst/ifft_eop
+add wave -noupdate /plc_design_vhd_tst/ifft_dout_real
+add wave -noupdate /plc_design_vhd_tst/ifft_dout_imag
+add wave -noupdate /plc_design_vhd_tst/i1/b2v_inst1/en_d
+add wave -noupdate /plc_design_vhd_tst/i1/b2v_inst1/en_delay_8
+add wave -noupdate /plc_design_vhd_tst/i1/b2v_inst1/ffr_rst_n
+add wave -noupdate -divider {New Divider}
+add wave -noupdate /plc_design_vhd_tst/i1/b2v_inst1/b2v_inst1/source_valid
 add wave -noupdate /plc_design_vhd_tst/ifft_source_sop
+add wave -noupdate /plc_design_vhd_tst/ifft_source_eop
+add wave -noupdate /plc_design_vhd_tst/ifft_source_real
+add wave -noupdate /plc_design_vhd_tst/ifft_source_imag
+add wave -noupdate /plc_design_vhd_tst/ifft_source_exp
+add wave -noupdate /plc_design_vhd_tst/ifft_source_error
+add wave -noupdate /plc_design_vhd_tst/i1/b2v_inst1/b2v_inst1/source_ready
 add wave -noupdate /plc_design_vhd_tst/max_p
 add wave -noupdate /plc_design_vhd_tst/p_cnt_o
 add wave -noupdate /plc_design_vhd_tst/pre_cnt
@@ -114,7 +121,7 @@ add wave -noupdate /plc_design_vhd_tst/ifft_sop_t
 add wave -noupdate /plc_design_vhd_tst/rx_data_from_file
 add wave -noupdate /plc_design_vhd_tst/rx_data_from_file_int_signal
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {62680000 ps} 0}
+WaveRestoreCursors {{Cursor 1} {8280000 ps} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 380
 configure wave -valuecolwidth 100
@@ -130,4 +137,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ps
 update
-WaveRestoreZoom {80740600 ps} {341392600 ps}
+WaveRestoreZoom {0 ps} {172956 ns}
